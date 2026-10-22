@@ -102,6 +102,7 @@ class Script:
                     self.errors.append(f'{p:#x}: runs off the end'); break
                 op = h(d, p)
                 if op not in OPS:
+                    # the interpreter's default case shows an error box and stops
                     self.errors.append(f'{p:#x}: unknown opcode {op:#x}'); break
                 n = oplen(d, p)
                 self.ops[p] = (op, n)

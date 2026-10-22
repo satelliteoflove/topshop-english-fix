@@ -6,7 +6,7 @@ import struct
 
 
 def decompress(buf, pos=0):
-    end = pos + struct.unpack_from('<I', buf, pos)[0]
+    end = min(pos + struct.unpack_from('<I', buf, pos)[0], len(buf))
     win = bytearray(4096)
     r = 0xfee
     out = bytearray()

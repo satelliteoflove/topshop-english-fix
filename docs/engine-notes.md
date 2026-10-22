@@ -11,7 +11,8 @@ Everything lives in `\A\`. No filenames appear in the executable; files are read
 through a queued reader (8001cd60, driven from a callback).
 
 - `.J` files are archives: a u32 count, count+1 u32 offsets (the last is the end), then the
-  entries. Each entry is an LZSS block (below). In RAM the archive keeps that layout, and
+  entries. An entry is stored raw or as an LZSS block (below); script entries (entry 0 of
+  EVE, CNT, CAL, TALK) are raw. In RAM the archive keeps that layout, and
   8004309c takes entry 0 as the event script (`DAT_800b269c`) and entry 1 as a second table
   (`DAT_800b2760`).
   - `EVE_000`-`EVE_099` (3 entries): event scripts. Entry 2 is graphics.
@@ -57,9 +58,28 @@ event card list and the points-exchange list, as plain ASCII with codes `%C` (ce
 
 ## Untranslated text
 
-TALK.J has about 312 Japanese strings against one English string per entry, and roughly 50
-event scripts keep some Japanese lines (often the `【お姉さん】` information-counter lines).
-Whether the US game ever shows them hasn't been checked yet.
+TALK.J (32 scripts of in-play character chatter, about 312 strings) is entirely Japanese and
+looks unused in the US release: the file table at 0x800a5750 still lists it (index 220),
+but no code loads that index as a constant, and 15 minutes of logged play (breakpoints on
+the loaders 8001c958 and 8001cb5c) never requested it. Not checked against the Japanese
+release.
+
+About 88 lines in the event scripts are Japanese (price changes, renovation events, TV crew,
+quiz rules, `【お姉さん】` information-counter announcements). Script code reaches them;
+whether US play ever triggers those events is still open.
+
+## Loading
+
+8001c958(index, dest, size, ...) and 8001cb5c(index, ...) queue a file by its index in
+the table at 0x800a5750 (4 bytes each: BCD minute, second, frame, mode). Both are called
+through pointer tables. `/tmp`-style logging with `emu.bp` on them lists what's loaded.
+
+## Script oddities
+
+- EVE_073 (the chance quiz): after the gosub at 0xc5 returns, 0xc9 `0xc8`, 0xcb `0xca ""`
+  (3 bytes), then 0xce holds `2c 80`, which isn't an opcode. The interpreter's default case
+  shows an error box ("%Cエラー…") and stops. Either that return never happens in practice or
+  it's a latent hang; not tested.
 
 ## Rendering
 
