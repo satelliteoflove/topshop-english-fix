@@ -23,5 +23,10 @@
   "id": "EXE:80010d5c",
   "text": "%CSystem data loaded.%E",
   "src": "96f34e70"
+ },
+ {
+  "id": "EXE:800137ec",
+  "text": "%CThe first character chosen%Kcan't be a CPU player.%E",
+  "src": "55035960"
  }
 ]
