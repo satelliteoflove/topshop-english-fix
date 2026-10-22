@@ -58,15 +58,45 @@ event card list and the points-exchange list, as plain ASCII with codes `%C` (ce
 
 ## Untranslated text
 
-TALK.J (32 scripts of in-play character chatter, about 312 strings) is entirely Japanese and
-looks unused in the US release: the file table at 0x800a5750 still lists it (index 220),
-but no code loads that index as a constant, and 15 minutes of logged play (breakpoints on
-the loaders 8001c958 and 8001cb5c) never requested it. Not checked against the Japanese
-release.
+Compared against the Japanese release, Tenant Wars (SLPS-01243, bin md5
+`444ffe92ee3af2f17669a1daf158e803`, extracted to `rips/jp/tw`). The script entries of the
+event files are byte-identical between the two; only their graphics entries differ.
 
-About 88 lines in the event scripts are Japanese (price changes, renovation events, TV crew,
-quiz rules, `【お姉さん】` information-counter announcements). Script code reaches them;
-whether US play ever triggers those events is still open.
+TALK.J (32 scripts of in-play character chatter) is byte-identical in both releases. In the
+US release no code loads its file index (220) as a constant, and 15 minutes of logged play
+never requested it. Not checked whether the Japanese release plays it.
+
+The Japanese lines in the event scripts all belong to events the developers had already cut:
+
+- The Japanese executable's event-description table (0x800b3850; US 0x800ab794, one
+  pointer per event number) labels events 2-23, 38, 39, 55-57, 74, 78 and 79 `ボツ`
+  ("scrapped") and 89-99 `イベント無し` ("no event"). The US table leaves 2-23 and the
+  others blank and calls 89-99 "No Event".
+- The random event picker (8008cc4c) never chooses them in either release (below).
+- They are price changes of 1-4% (2-23), one item's price ±5% (38, 39), renovation
+  time-skips (55-57), "buy every empty store" (74), a TV crew and a terrorist siege
+  (78, 79), and store reputation ±10% (89-94). 95-99 are copies of a price event.
+
+## Events
+
+An event's script is EVE_nnn.J, file index 52 + n (8006d4cc: index = event + 0x34). The
+event number is stored at 0x800b2638 by one of two places:
+
+- 80044cb8: the random picker 8008cc4c. It puts the player in one of eight brackets (asset
+  gap and progress), rolls 0-199, and walks 49 nine-byte records at 0x800adc64 (event,
+  then a cumulative threshold per bracket). Event 99 means the month's seasonal event,
+  looked up in the bytes after the table (80-88 by month).
+- 80044d34: when the flag at 0x800fe08f is set, the result of the event-select menu task
+  (0x8006cecc, which shows "%CEvent:" and the description list).
+
+The US release changed two records of the random table: rows 44 and 47 were events 73
+(Chance Quiz) and 77 (Speed-up Quiz) in Japan, and are 76 ("・・・Whiff・・・", nothing
+happens) in the US, with the same odds. So neither quiz comes up at random in the US, which
+is likely why EVE_077's rules text was never finished and why EVE_073's dead end (below)
+hasn't been seen.
+
+The sale descriptions in the table (-20/30/40%) don't match what the sale scripts announce
+(30/50/70% off); which is right is a question for the code that applies them.
 
 ## Loading
 
