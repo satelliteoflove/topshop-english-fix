@@ -110,6 +110,11 @@ through pointer tables. `/tmp`-style logging with `emu.bp` on them lists what's 
   (3 bytes), then 0xce holds `2c 80`, which isn't an opcode. The interpreter's default case
   shows an error box ("%Cエラー…") and stops. Either that return never happens in practice or
   it's a latent hang; not tested.
+- "You are closed today." (EXE 80012210, JP 今日はおやすみです) is dead. The turn task (state
+  halfword at task record +4, 0x800ce9fc for the turn; handler 80043a98) shows it in state
+  3350 (0xd16), but nothing sets that state: 3320 dispatches through the five-entry table at
+  0x80012314 to 3800/3400/3500/3600/3700. Store closures (EVE_030–033) only hang a "Closed"
+  sign on the store; forcing event 30 and playing several rounds never reached the message.
 
 ## Rendering
 
