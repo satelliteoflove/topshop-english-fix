@@ -25,6 +25,26 @@
   "src": "96f34e70"
  },
  {
+  "id": "EXE:80012284",
+  "text": "%CTemporarily Closed.%E",
+  "src": "f540921a"
+ },
+ {
+  "id": "EXE:8001229c",
+  "text": "Deliveries are blocked%Kby an unseen force.",
+  "src": "bc7c0ce3"
+ },
+ {
+  "id": "EXE:8001273c",
+  "text": "%CStop on this space?%KYes%KNo%E",
+  "src": "51a85319"
+ },
+ {
+  "id": "EXE:80012760",
+  "text": "%CStopping on this space.%E",
+  "src": "531cb315"
+ },
+ {
   "id": "EXE:800137ec",
   "text": "%CThe first character chosen%Kcan't be a CPU player.%E",
   "src": "55035960"
