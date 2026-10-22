@@ -55,6 +55,21 @@
   "src": "531cb315"
  },
  {
+  "id": "EXE:800131ec",
+  "text": "%CPlease select an item%K you wish to buy.",
+  "src": "50a42959"
+ },
+ {
+  "id": "EXE:80013218",
+  "text": "%CBuy this item?%KYes%KNo%E",
+  "src": "edbd5d9e"
+ },
+ {
+  "id": "EXE:800132a4",
+  "text": "%CLeave without buying?%KYes%KNo%E",
+  "src": "32e7f883"
+ },
+ {
   "id": "EXE:800137ec",
   "text": "%CThe first character chosen%Kcan't be a CPU player.%E",
   "src": "55035960"
