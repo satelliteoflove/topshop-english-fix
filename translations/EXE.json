@@ -70,6 +70,21 @@
   "src": "32e7f883"
  },
  {
+  "id": "EXE:8001331c",
+  "text": "%CBuy out this store?",
+  "src": "058cd4bd"
+ },
+ {
+  "id": "EXE:80013338",
+  "text": "%CYou don't have enough money.%E",
+  "src": "23d105e6"
+ },
+ {
+  "id": "EXE:80013350",
+  "text": "%CThis store is already open elsewhere.%E",
+  "src": "a0a4e418"
+ },
+ {
   "id": "EXE:800137ec",
   "text": "%CThe first character chosen%Kcan't be a CPU player.%E",
   "src": "55035960"
