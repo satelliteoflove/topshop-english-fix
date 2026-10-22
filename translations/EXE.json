@@ -1,5 +1,15 @@
 [
  {
+  "id": "EXE:80010360",
+  "text": "%CNo Memory Card detected.%KPlease insert Memory Card.%KRetry%KQuit%E",
+  "src": "9d2279c9"
+ },
+ {
+  "id": "EXE:800104d8",
+  "text": "%CLoading system data…%KPlease do not remove Memory Card.%E",
+  "src": "09ae408f"
+ },
+ {
   "id": "EXE:800105d8",
   "text": "%CFormat complete.%E",
   "src": "00a56c05"
@@ -8,5 +18,10 @@
   "id": "EXE:80010604",
   "text": "%CSaving…%KPlease do not remove Memory Card.%E",
   "src": "f362d0cd"
+ },
+ {
+  "id": "EXE:80010d5c",
+  "text": "%CSystem data loaded.%E",
+  "src": "96f34e70"
  }
 ]
