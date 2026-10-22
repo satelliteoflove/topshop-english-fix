@@ -25,6 +25,11 @@
   "src": "96f34e70"
  },
  {
+  "id": "EXE:80012248",
+  "text": "A rival has blocked you from%Kopening new stores.",
+  "src": "1b167840"
+ },
+ {
   "id": "EXE:80012284",
   "text": "%CTemporarily Closed.%E",
   "src": "f540921a"
@@ -33,6 +38,11 @@
   "id": "EXE:8001229c",
   "text": "Deliveries are blocked%Kby an unseen force.",
   "src": "bc7c0ce3"
+ },
+ {
+  "id": "EXE:800122c8",
+  "text": "%CYou have a negative balance.%E",
+  "src": "a34d0fe7"
  },
  {
   "id": "EXE:8001273c",
