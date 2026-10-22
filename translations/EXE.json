@@ -95,6 +95,11 @@
   "src": "3facaf51"
  },
  {
+  "id": "EXE:80013524",
+  "text": "%CFinish selling stores?%KYes%KNo%E",
+  "src": "fdfb24c3"
+ },
+ {
   "id": "EXE:80013634",
   "text": "%CPlease select a store%K to deliver to.",
   "src": "d3151b44"
