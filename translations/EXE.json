@@ -85,6 +85,31 @@
   "src": "a0a4e418"
  },
  {
+  "id": "EXE:80013408",
+  "text": "%CThis store is fully stocked.%E",
+  "src": "be15756c"
+ },
+ {
+  "id": "EXE:80013424",
+  "text": "%CPlease select an item%K you want to deliver.",
+  "src": "3facaf51"
+ },
+ {
+  "id": "EXE:80013634",
+  "text": "%CPlease select a store%K to deliver to.",
+  "src": "d3151b44"
+ },
+ {
+  "id": "EXE:80013664",
+  "text": "%CSelect a store to deliver to.",
+  "src": "8b93cb16"
+ },
+ {
+  "id": "EXE:800136e0",
+  "text": "%K%K%CYou have no stores to deliver to.%E",
+  "src": "da22b717"
+ },
+ {
   "id": "EXE:800137ec",
   "text": "%CThe first character chosen%Kcan't be a CPU player.%E",
   "src": "55035960"
