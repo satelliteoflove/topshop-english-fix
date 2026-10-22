@@ -85,3 +85,17 @@ through pointer tables. `/tmp`-style logging with `emu.bp` on them lists what's 
 
 8001dbb4 draws a glyph: bytes with a high nibble of 8, 9, e or f start a Shift-JIS pair,
 anything else comes from the single-byte font.
+
+## Free RAM
+
+The game's heap (8001d48c) is 0x128 blocks of 2 KB from 0x8015c000, so it ends at
+0x801f0000. Above that, up to the stack (0x801fff00, seen no deeper than 0x801ff500 in
+play), nothing was ever nonzero in a RAM survey through boot, menus, Story and Free Play,
+and no code or data in the executable points there. `scripts/build.py` puts relocated
+executable text at 0x801f0000-0x801fa000.
+
+## References to executable text
+
+Every string with real text has a direct reference: 458 through pointer-table words and
+112 through `lui`/`addiu` pairs, none sharing a `lui` (`scripts/exerefs.py`). The rest
+(67, mostly byte soup) are reached by index or not at all and can only change in place.
