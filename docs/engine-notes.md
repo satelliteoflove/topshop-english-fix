@@ -121,6 +121,19 @@ through pointer tables. `/tmp`-style logging with `emu.bp` on them lists what's 
 8001dbb4 draws a glyph: bytes with a high nibble of 8, 9, e or f start a Shift-JIS pair,
 anything else comes from the single-byte font.
 
+## Points exchange
+
+The list is 53 fixed 40-byte strings at 0x8001659c (label padded to column 36, cost in the
+last two of 38 columns; the box is exactly that wide). Costs and pointers are pairs at
+0x800abf9c, index 0 = "Earn 1 Point". 80070060 decides which items are usable (switch at
+0x800173ac on index-2); the effects are the switch at 8006e4b8 (table 0x8001713c).
+
+Store squares are 0x48-byte records at 0x80114a40. +0xd turns on a price modifier, +0xe is
+the percentage, +0x10 the turn it expires. 8007661c prices each of a store's 8 item slots:
+base x item percentage / 100 into +0x16, then, if +5 or +0xd is set, that x modifier / 100
+into +0x18. Sales use values below 100 (80046104 treats < 100 as "on sale"). Item 31,
+"Store items double (4 turns)", sets 200 on every store you own: your prices double.
+
 ## Free RAM
 
 The game's heap (8001d48c) is 0x128 blocks of 2 KB from 0x8015c000, so it ends at
