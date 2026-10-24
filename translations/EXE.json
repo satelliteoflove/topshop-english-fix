@@ -201,7 +201,97 @@
  },
  {
   "id": "EXE:8001681c",
-  "text": "Stock one costly item               15",
+  "text": "Deliver one costly item             15",
   "src": "dc122bad"
+ },
+ {
+  "id": "EXE:80016844",
+  "text": "Deliver cheap items to your stores  14",
+  "src": "5bc63756"
+ },
+ {
+  "id": "EXE:8001686c",
+  "text": "Make a free delivery                14",
+  "src": "462b9146"
+ },
+ {
+  "id": "EXE:80016894",
+  "text": "Receive 300 in cash per store       13",
+  "src": "01c295f0"
+ },
+ {
+  "id": "EXE:800168bc",
+  "text": "Put 4 rival stores out of stock     12",
+  "src": "2d520777"
+ },
+ {
+  "id": "EXE:800168e4",
+  "text": "Double your prices for 4 turns      12",
+  "src": "02b6aeee"
+ },
+ {
+  "id": "EXE:8001690c",
+  "text": "Receive 1600 in cash                12",
+  "src": "7ebd22db"
+ },
+ {
+  "id": "EXE:80016934",
+  "text": "Close a rival's Level 2 store       10",
+  "src": "a0426646"
+ },
+ {
+  "id": "EXE:8001695c",
+  "text": "Close all out-of-stock stores       10",
+  "src": "5d89cc45"
+ },
+ {
+  "id": "EXE:80016984",
+  "text": "Cut rival money (150 per store)     10",
+  "src": "b3b4969c"
+ },
+ {
+  "id": "EXE:800169ac",
+  "text": "Deliver to all your stores          10",
+  "src": "33d615d9"
+ },
+ {
+  "id": "EXE:800169d4",
+  "text": "Open a store with a rival's money   10",
+  "src": "fd191527"
+ },
+ {
+  "id": "EXE:800169fc",
+  "text": "Receive 1300 in cash                10",
+  "src": "ba20cff6"
+ },
+ {
+  "id": "EXE:80016a24",
+  "text": "Wear squeaky \"Chirp-Chirp\" shoes     9",
+  "src": "3ae1f702"
+ },
+ {
+  "id": "EXE:80016a4c",
+  "text": "A rival misses their next payday     9",
+  "src": "8b8a4d1e"
+ },
+ {
+  "id": "EXE:80016a74",
+  "text": "Double your next payday              9",
+  "src": "5316b590"
+ },
+ {
+  "id": "EXE:80016a9c",
+  "text": "Force everyone to U-turn             8",
+  "src": "eeb25dec"
+ },
+ {
+  "id": "EXE:80016ac4",
+  "text": "Switch places with a rival           8",
+  "src": "74bab960"
+ },
+ {
+  "id": "EXE:80016aec",
+  "text": "Receive 1000 in cash                 8",
+  "src": "a824c461"
  }
 ]
