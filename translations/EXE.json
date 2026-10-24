@@ -118,5 +118,90 @@
   "id": "EXE:800137ec",
   "text": "%CThe first character chosen%Kcan't be a CPU player.%E",
   "src": "55035960"
+ },
+ {
+  "id": "EXE:8001659c",
+  "text": "Claim Victory!                      99",
+  "src": "8ea3175c"
+ },
+ {
+  "id": "EXE:800165c4",
+  "text": "Match a rival's money               50",
+  "src": "6858e663"
+ },
+ {
+  "id": "EXE:800165ec",
+  "text": "Take a rival's Level 4 store        49",
+  "src": "a2ec5403"
+ },
+ {
+  "id": "EXE:80016614",
+  "text": "Cut all rivals' money to 1          48",
+  "src": "bf41d1e3"
+ },
+ {
+  "id": "EXE:8001663c",
+  "text": "Deliver costly items to your stores 44",
+  "src": "909f85b3"
+ },
+ {
+  "id": "EXE:80016664",
+  "text": "Upgrade your store to Level 4       42",
+  "src": "bb67d323"
+ },
+ {
+  "id": "EXE:8001668c",
+  "text": "Close a rival's Level 4 store       33",
+  "src": "342df638"
+ },
+ {
+  "id": "EXE:800166b4",
+  "text": "Take half a rival's money           29",
+  "src": "065bf36f"
+ },
+ {
+  "id": "EXE:800166dc",
+  "text": "Cut a rival's money to 1            28",
+  "src": "0ebf96d8"
+ },
+ {
+  "id": "EXE:80016704",
+  "text": "Cut rival money (300 per store)     27",
+  "src": "8e90f0c2"
+ },
+ {
+  "id": "EXE:8001672c",
+  "text": "Halve all rivals' money             25",
+  "src": "8050e8bb"
+ },
+ {
+  "id": "EXE:80016754",
+  "text": "Close a rival's Level 3 store       23",
+  "src": "59c0d9c2"
+ },
+ {
+  "id": "EXE:8001677c",
+  "text": "Take all out-of-stock stores        18",
+  "src": "665ec1df"
+ },
+ {
+  "id": "EXE:800167a4",
+  "text": "Shuffle everyone's money            17",
+  "src": "546f5965"
+ },
+ {
+  "id": "EXE:800167cc",
+  "text": "Halve a rival's money               16",
+  "src": "0a5bd26b"
+ },
+ {
+  "id": "EXE:800167f4",
+  "text": "Halve a rival's points              15",
+  "src": "76d99ddd"
+ },
+ {
+  "id": "EXE:8001681c",
+  "text": "Stock one costly item               15",
+  "src": "dc122bad"
  }
 ]
