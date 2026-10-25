@@ -415,14 +415,44 @@
   "src": "27e38035"
  },
  {
+  "id": "EXE:80017ccc",
+  "text": "Baby Tee",
+  "src": "9610c473"
+ },
+ {
+  "id": "EXE:80017cf4",
+  "text": "Sundress",
+  "src": "2b038e83"
+ },
+ {
   "id": "EXE:80017d10",
   "text": "Mashed Potatoes",
   "src": "56166ef3"
  },
  {
+  "id": "EXE:80017ddc",
+  "text": "Fish Finder",
+  "src": "4eb22bd7"
+ },
+ {
+  "id": "EXE:80017de8",
+  "text": "Bass Boat",
+  "src": "80caf70a"
+ },
+ {
   "id": "EXE:80017e08",
   "text": "Screwdriver",
   "src": "34b1cff9"
+ },
+ {
+  "id": "EXE:80017e18",
+  "text": "Plywood",
+  "src": "ac35bd36"
+ },
+ {
+  "id": "EXE:80017e34",
+  "text": "Model Kit",
+  "src": "139fd6aa"
  },
  {
   "id": "EXE:80017f14",
@@ -473,6 +503,11 @@
   "id": "EXE:800182a8",
   "text": "Go-Karts",
   "src": "11644cf1"
+ },
+ {
+  "id": "EXE:80018308",
+  "text": "Film Developing",
+  "src": "7903b5f5"
  },
  {
   "id": "EXE:80018390",
