@@ -393,5 +393,120 @@
   "id": "EXE:80016e3c",
   "text": "%CPick this one?%KYes%KNo%E",
   "src": "1abcf2ca"
+ },
+ {
+  "id": "EXE:80017ad0",
+  "text": "Luxury Condo",
+  "src": "d67ba1e4"
+ },
+ {
+  "id": "EXE:80017ba4",
+  "text": "Hawaii, 6 Days",
+  "src": "5db37406"
+ },
+ {
+  "id": "EXE:80017bb4",
+  "text": "Europe, 8 Days",
+  "src": "573fc29b"
+ },
+ {
+  "id": "EXE:80017bdc",
+  "text": "Castanets",
+  "src": "27e38035"
+ },
+ {
+  "id": "EXE:80017d10",
+  "text": "Mashed Potatoes",
+  "src": "56166ef3"
+ },
+ {
+  "id": "EXE:80017e08",
+  "text": "Screwdriver",
+  "src": "34b1cff9"
+ },
+ {
+  "id": "EXE:80017f14",
+  "text": "Marinated Seafood",
+  "src": "f1cc99cc"
+ },
+ {
+  "id": "EXE:80017f38",
+  "text": "Beef Saute",
+  "src": "f566b664"
+ },
+ {
+  "id": "EXE:80018098",
+  "text": "Veggie Noodles",
+  "src": "3ac8901e"
+ },
+ {
+  "id": "EXE:800180a8",
+  "text": "Chicken Noodles",
+  "src": "c7168839"
+ },
+ {
+  "id": "EXE:800180b8",
+  "text": "Pork Noodles",
+  "src": "4c96c13e"
+ },
+ {
+  "id": "EXE:800180c4",
+  "text": "Beef Noodles",
+  "src": "48f2e5db"
+ },
+ {
+  "id": "EXE:800180d0",
+  "text": "Combo Noodles",
+  "src": "2a7324f1"
+ },
+ {
+  "id": "EXE:800180e0",
+  "text": "Lobster Noodles",
+  "src": "7ee0e528"
+ },
+ {
+  "id": "EXE:80018220",
+  "text": "Popcorn",
+  "src": "bef5d827"
+ },
+ {
+  "id": "EXE:800182a8",
+  "text": "Go-Karts",
+  "src": "11644cf1"
+ },
+ {
+  "id": "EXE:80018390",
+  "text": "Cookies & Cream",
+  "src": "8149cd62"
+ },
+ {
+  "id": "EXE:800183ac",
+  "text": "Mixed Fruit",
+  "src": "ffbb697d"
+ },
+ {
+  "id": "EXE:80018490",
+  "text": "Baby's Breath",
+  "src": "ba863c2c"
+ },
+ {
+  "id": "EXE:800b208c",
+  "text": "Z Man 3",
+  "src": "daf3f6e4"
+ },
+ {
+  "id": "EXE:800b2160",
+  "text": "Potatoes",
+  "src": "cd9830ae"
+ },
+ {
+  "id": "EXE:800b2304",
+  "text": "Yo-yo",
+  "src": "81c39852"
+ },
+ {
+  "id": "EXE:800b230c",
+  "text": "Tissues",
+  "src": "a40125b5"
  }
 ]
