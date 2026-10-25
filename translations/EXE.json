@@ -281,7 +281,7 @@
  },
  {
   "id": "EXE:80016a9c",
-  "text": "Force everyone to U-turn             8",
+  "text": "Reverse everyone's direction         8",
   "src": "eeb25dec"
  },
  {
@@ -293,5 +293,95 @@
   "id": "EXE:80016aec",
   "text": "Receive 1000 in cash                 8",
   "src": "a824c461"
+ },
+ {
+  "id": "EXE:80016b14",
+  "text": "Put a rival store out of stock       7",
+  "src": "5e9204b8"
+ },
+ {
+  "id": "EXE:80016b3c",
+  "text": "Cut a rival's money to 3/4           7",
+  "src": "0c4208b6"
+ },
+ {
+  "id": "EXE:80016b64",
+  "text": "Slow pencil, instant stop (2 turns)  7",
+  "src": "36ac6ddd"
+ },
+ {
+  "id": "EXE:80016b8c",
+  "text": "Take a rival's out-of-stock store    7",
+  "src": "ea999c29"
+ },
+ {
+  "id": "EXE:80016bb4",
+  "text": "Receive 150 in cash per store        7",
+  "src": "e682a913"
+ },
+ {
+  "id": "EXE:80016bdc",
+  "text": "Rival pencil: Events only (2 turns)  6",
+  "src": "1b39a474"
+ },
+ {
+  "id": "EXE:80016c04",
+  "text": "Rival pencil: 1s and 2s (2 turns)    6",
+  "src": "ff3699f1"
+ },
+ {
+  "id": "EXE:80016c2c",
+  "text": "Open a random store for free         6",
+  "src": "bb4ff773"
+ },
+ {
+  "id": "EXE:80016c54",
+  "text": "Receive 700 in cash                  6",
+  "src": "cbbe07b6"
+ },
+ {
+  "id": "EXE:80016c7c",
+  "text": "Close a rival's Level 1 store        5",
+  "src": "3cf1bb8a"
+ },
+ {
+  "id": "EXE:80016ca4",
+  "text": "Reverse a rival's direction          4",
+  "src": "9b1b1d2f"
+ },
+ {
+  "id": "EXE:80016ccc",
+  "text": "Deliver to a rival's store           3",
+  "src": "be998c22"
+ },
+ {
+  "id": "EXE:80016cf4",
+  "text": "Deliver to one of your stores        3",
+  "src": "037672be"
+ },
+ {
+  "id": "EXE:80016d1c",
+  "text": "Receive 400 in cash                  3",
+  "src": "0ec9201e"
+ },
+ {
+  "id": "EXE:80016d44",
+  "text": "Rival can't open stores (2 turns)    2",
+  "src": "cd523212"
+ },
+ {
+  "id": "EXE:80016d6c",
+  "text": "Rival can't deliver (2 turns)        2",
+  "src": "e31d824b"
+ },
+ {
+  "id": "EXE:80016d94",
+  "text": "Receive 200 in cash                  1",
+  "src": "2852d868"
+ },
+ {
+  "id": "EXE:80016dbc",
+  "text": "Earn 1 point                         0",
+  "src": "815c4d68"
  }
 ]

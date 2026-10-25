@@ -134,6 +134,14 @@ base x item percentage / 100 into +0x16, then, if +5 or +0xd is set, that x modi
 into +0x18. Sales use values below 100 (80046104 treats < 100 as "on sale"). Item 31,
 "Store items double (4 turns)", sets 200 on every store you own: your prices double.
 
+Player +0x33 is a payday modifier: 1 (item 22, "Stop rival money") zeroes and 2 (item 21,
+"Money double") doubles the amount 80076270 computes for the "Payday!"/"Bonus!!" task
+(800579bc), which then clears it. "(Next turn)" in the US labels was wrong; it's the next
+payday. Player +0x34 is a pencil mode with expiry turn at +0x58; the spinner task (around
+800546a4) treats 3 (item 15, "Lower pencil movement") as spin at 0x400 instead of 0x2000
+from a fixed start, and stop at once on the press instead of coasting a random amount.
+Item 16 ("Reduce rival money 3/4") sets money to 3/4, not down by 3/4.
+
 ## Free RAM
 
 The game's heap (8001d48c) is 0x128 blocks of 2 KB from 0x8015c000, so it ends at
