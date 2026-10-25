@@ -383,5 +383,15 @@
   "id": "EXE:80016dbc",
   "text": "Earn 1 point                         0",
   "src": "815c4d68"
+ },
+ {
+  "id": "EXE:80016e24",
+  "text": "%CTrade in your points.",
+  "src": "69a788e9"
+ },
+ {
+  "id": "EXE:80016e3c",
+  "text": "%CPick this one?%KYes%KNo%E",
+  "src": "1abcf2ca"
  }
 ]
