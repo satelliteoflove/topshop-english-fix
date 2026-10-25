@@ -65,6 +65,11 @@
   "src": "edbd5d9e"
  },
  {
+  "id": "EXE:80013244",
+  "text": "Points received: ",
+  "src": "ce55956c"
+ },
+ {
   "id": "EXE:800132a4",
   "text": "%CLeave without buying?%KYes%KNo%E",
   "src": "32e7f883"
@@ -523,6 +528,11 @@
   "id": "EXE:80018490",
   "text": "Baby's Breath",
   "src": "ba863c2c"
+ },
+ {
+  "id": "EXE:800b1f84",
+  "text": "",
+  "src": "0f183f29"
  },
  {
   "id": "EXE:800b208c",
