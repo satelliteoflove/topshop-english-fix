@@ -1,5 +1,10 @@
 [
  {
+  "id": "EVE_033:0028",
+  "text": "【Information Desk】%KAttention, shoppers!",
+  "src": "f5d40b1e"
+ },
+ {
   "id": "EVE_033:006e",
   "text": "All stores are%Kclosed for two turns.",
   "src": "9e6c7839"
