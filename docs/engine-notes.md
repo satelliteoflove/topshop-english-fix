@@ -142,6 +142,14 @@ payday. Player +0x34 is a pencil mode with expiry turn at +0x58; the spinner tas
 from a fixed start, and stop at once on the press instead of coasting a random amount.
 Item 16 ("Reduce rival money 3/4") sets money to 3/4, not down by 3/4.
 
+A store's shelf is +6 (items stocked, at most +7) and eight 6-byte slots from +0x14: in
+stock, grade (0-5, 5 cheapest), price. Event op 0x181 (80082244, args owner, count, grade)
+sets each of the owner's stores to count items of grade max(grade, 6 - 0x800ad9b4[level]);
+-2 is the current player. Event 48 passes (-2, 2, 4), two of the second-cheapest product;
+event 50 passes (-2, 1, 0), one of the dearest the store's level allows. Event 47's picker
+(8007aba0) offers only empty spaces in areas (+2, four spaces each) where the player has no
+store.
+
 ## Free RAM
 
 The game's heap (8001d48c) is 0x128 blocks of 2 KB from 0x8015c000, so it ends at
