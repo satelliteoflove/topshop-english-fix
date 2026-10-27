@@ -152,6 +152,38 @@ event 50 passes (-2, 1, 0), one of the dearest the store's level allows. Event 4
 (8007aba0) offers only empty spaces in areas (+2, four spaces each) where the player has no
 store.
 
+## Story progress and unlockable characters
+
+The memory card file is `BASLUS-01333TOPSHOP`. Its system data is 0x80 bytes at file
+offset 0x200 (in RAM through the pointer at 0x800b2544), checksummed at +0x1c. Bytes
++8..+0x17 and +0x19 are copied to and from 0x800fe180..0x800fe18f and 0x800fe191 (loaded by
+80036720, defaults set by 800365e0):
+
+- +8 (0x800fe180): the furthest story stage cleared, 0-10.
+- +0xa..+0x17 (0x800fe182 + n): character n is selectable, in the name order of the table
+  at 0x800a8aa8 (Meower, Maiko, Dona, Gummi, Merlin, Cindy, Rob, Patty, Chat, Oilow, Bro,
+  Squosh, Santa, Colin). The first eleven are always 1; the free-play roster loop at
+  8003af14 skips any that are 0.
+- +0x19 (0x800fe191): stage clears counted across every story game, stopping at 15.
+
+Story mode has 10 stages (target money table at 0x800a8ae0). 0x800fe0b7 is the current
+stage, 0-based. Clearing a stage starts the save task 8003558c (from 80074a68), whose state
+0 adds 1 to the stage, then:
+
+- if that beats the record at 0x800fe180, records it; reaching 9 unlocks Squosh and 10 (the
+  last stage, so finishing the story) unlocks Santa;
+- adds 1 to the clear count (up to 15); once it is 15 and the record is 10, unlocks Colin.
+
+So Colin needs the story finished once plus 15 stage clears in all, which on a second run
+from stage 1 comes at its fifth stage, not at its end. Nothing reaches the card until a
+save: the "Save?" prompt after each clear (states 10 onward) or a normal save (80034c70
+takes the maximum of the card and RAM values). If the card has no Top Shop file yet, state
+332 creates one and state 333 repeats the bookkeeping, so that clear counts twice.
+
+Starting a new story game after clearing at least one stage offers a starting stage (setup
+screen 80038588, fields +4 and +5): stage 1, or 2 up to one past the record, capped at
+stage 10.
+
 ## Free RAM
 
 The game's heap (8001d48c) is 0x128 blocks of 2 KB from 0x8015c000, so it ends at
