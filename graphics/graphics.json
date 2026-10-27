@@ -1,4 +1,6 @@
 [
  {"archive": "EVE_084", "entry": 2, "record": 4, "png": "EVE_084_e2_r4.png", "src": "a36ba20a",
-  "note": "Event 84 picture: \"Final sale\" redrawn as \"Clearance / Sale\" to match the text box"}
+  "note": "Event 84 picture: \"Final sale\" redrawn as \"Clearance / Sale\" to match the text box"},
+ {"archive": "EVE_084", "script": "03bb", "old": "0040", "new": "0032",
+  "note": "Event 84: draw the picture at x=50 instead of 64 (op 0x61) so the info desk girl's hat doesn't cover \"Clearance\""}
 ]

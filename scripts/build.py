@@ -34,6 +34,11 @@ The PNG is palettized with the game's own indices, the size of the record's pixe
 entry, overwrites the record's pixels, and LZSS-compresses it again. src is the first 8 hex
 digits of the sha1 of the original pixels.
 
+The same file can hold script byte patches that go with a picture, e.g. moving it:
+  {"archive": "EVE_084", "script": "03bb", "old": "0040", "new": "0032"}
+applied in place to entry 0 at that offset of the original script (text edits never move
+existing bytes), after checking the old bytes.
+
 Files keep their place on the disc while they stay within their sector count; if one grows
 past it, every later file shifts and the executable's file tables (CD positions at
 0x800a5750, sector counts at 0x800a65d8) are rewritten from the new layout.
@@ -198,6 +203,7 @@ def load_graphics():
     p = os.path.join(GFX, 'graphics.json')
     by_archive = {}
     for g in json.load(open(p)) if os.path.exists(p) else []:
+        g.setdefault('kind', 'script' if 'script' in g else 'image')
         by_archive.setdefault(g['archive'], []).append(g)
     return by_archive
 
@@ -208,6 +214,7 @@ def patch_graphics(path, gs):
     b = open(path, 'rb').read()
     offs = struct.unpack_from(f'<{struct.unpack_from("<I", b, 0)[0] + 1}I', b, 4)
     out = {}
+    gs = [g for g in gs if g['kind'] == 'image']
     for k in sorted({g['entry'] for g in gs}):
         e = bytearray(lzss.decompress(b, offs[k]))
         recs, p = [], 0
@@ -321,6 +328,13 @@ def main():
             path = os.path.join(DISC, 'A', src + '.J')
             new0 = patch_script(src, dumptext.script_of(path), es, dump) if es else None
             gs = graphics.get(src, [])
+            for g in (g for g in gs if g['kind'] == 'script'):
+                new0 = bytearray(new0 if new0 is not None else dumptext.script_of(path))
+                o, old, new = int(g['script'], 16), bytes.fromhex(g['old']), bytes.fromhex(g['new'])
+                if new0[o:o + len(old)] != old or len(old) != len(new):
+                    raise BuildError(f'{src}:{g["script"]}: expected {g["old"]}')
+                new0[o:o + len(new)] = new
+                new0 = bytes(new0)
             blob = rebuild_archive(path, new0, patch_graphics(path, gs) if gs else None)
             dst = os.path.join(STAGE, 'A', src + '.J')
             open(dst, 'wb').write(blob)
