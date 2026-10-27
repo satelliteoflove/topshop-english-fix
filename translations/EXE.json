@@ -126,7 +126,7 @@
  },
  {
   "id": "EXE:800165c4",
-  "text": "Match a rival's money               50",
+  "text": "Get cash equal to a rival's money   50",
   "src": "6858e663"
  },
  {
@@ -166,7 +166,7 @@
  },
  {
   "id": "EXE:80016704",
-  "text": "Cut rival money (300 per store)     27",
+  "text": "Rivals lose 300 per store they own  27",
   "src": "8e90f0c2"
  },
  {
@@ -181,7 +181,7 @@
  },
  {
   "id": "EXE:8001677c",
-  "text": "Take all out-of-stock stores        18",
+  "text": "Take rivals' out-of-stock stores    18",
   "src": "665ec1df"
  },
  {
@@ -201,7 +201,7 @@
  },
  {
   "id": "EXE:8001681c",
-  "text": "Deliver one costly item             15",
+  "text": "Deliver 1 costly item to each store 15",
   "src": "dc122bad"
  },
  {
@@ -241,12 +241,12 @@
  },
  {
   "id": "EXE:8001695c",
-  "text": "Close all out-of-stock stores       10",
+  "text": "Close rivals' out-of-stock stores   10",
   "src": "5d89cc45"
  },
  {
   "id": "EXE:80016984",
-  "text": "Cut rival money (150 per store)     10",
+  "text": "Rivals lose 150 per store they own  10",
   "src": "b3b4969c"
  },
  {

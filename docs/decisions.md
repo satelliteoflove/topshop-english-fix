@@ -24,6 +24,14 @@ suggest undoing them.
   with whatever was in the buffer after them. Both now fit exactly. The build refuses an
   edit that's longer than its original wherever the code copies it this way; 25 strings in
   the executable are copied like this (`block_copies` in scripts/build.py).
+- **Six points-exchange labels say what the item actually does,** checked against the code
+  that carries out each effect (docs/exe-audit.html). "Match a rival's money" was wrong: it
+  gives you cash equal to the rival's total, and they keep theirs, so it's now "Get cash
+  equal to a rival's money". "Close all out-of-stock stores" and "Take all out-of-stock
+  stores" only touch rivals' stores, so they say "rivals'". "Deliver one costly item"
+  delivers one to each of your stores, so it's "Deliver 1 costly item to each store". The
+  two "Cut rival money" items became "Rivals lose 150/300 per store they own", since every
+  rival pays for their own stores and the money doesn't go to you.
 
 # Left as they are, on purpose
 
