@@ -3,5 +3,15 @@
   "id": "EVE_075:0028",
   "text": "【Information Desk】%KAttention, shoppers!",
   "src": "f5d40b1e"
+ },
+ {
+  "id": "EVE_075:006e",
+  "text": "%NMY is now wearing%K\"Chirp-Chirp\" sandals.",
+  "src": "90e1926e"
+ },
+ {
+  "id": "EVE_075:00a6",
+  "text": "They go \"chirp-chirp\"%Kwith every step.",
+  "src": "49a32918"
  }
 ]

@@ -3,5 +3,10 @@
   "id": "EVE_080:0028",
   "text": "【Information Desk】%KAttention, shoppers!",
   "src": "f5d40b1e"
+ },
+ {
+  "id": "EVE_080:006e",
+  "text": "A snowstorm has hit!%KAll items are 50％ off%Kfor one turn.",
+  "src": "28c648e1"
  }
 ]
