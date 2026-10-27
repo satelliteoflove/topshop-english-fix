@@ -27,6 +27,13 @@ How text goes back in:
   old one is repointed.
 - Script, loose (no traced code reaches it): in place only, NUL-padded.
 
+Graphics edits are listed in graphics/graphics.json, each
+  {"archive": "EVE_084", "entry": 2, "record": 4, "png": "EVE_084_e2_r4.png", "src": "a36ba20a"}
+The PNG is palettized with the game's own indices, the size of the record's pixel data
+(a 16-bit-wide VRAM record of w words holds 2w 8-bit pixels). The build decompresses the
+entry, overwrites the record's pixels, and LZSS-compresses it again. src is the first 8 hex
+digits of the sha1 of the original pixels.
+
 Files keep their place on the disc while they stay within their sector count; if one grows
 past it, every later file shifts and the executable's file tables (CD positions at
 0x800a5750, sector counts at 0x800a65d8) are rewritten from the new layout.
@@ -35,12 +42,13 @@ import glob, hashlib, json, os, re, shutil, struct, subprocess, sys
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(0, os.path.dirname(__file__))
-import evscript, dumptext
+import evscript, dumptext, lzss
 
 CLEAN = os.path.join(ROOT, 'rips/clean')
 DISC = os.path.join(CLEAN, 'topshop')
 STAGE = os.path.join(ROOT, 'rips/build')
 TRANS = os.path.join(ROOT, 'translations')
+GFX = os.path.join(ROOT, 'graphics')
 MKPSXISO = os.environ.get('MKPSXISO', os.path.expanduser('~/tools/mkpsxiso'))
 EXE_NAME = 'SLUS_013.33'
 EXE_BASE = 0x80010000 - 0x800
@@ -186,15 +194,54 @@ def patch_script(name, d, edits, dump):
     return bytes(d)
 
 
-def rebuild_archive(path, entry0):
-    """Repack a .J with a new entry 0. Checked to give back the original byte for byte for
-    every EVE, CNT and CAL archive; TALK.J pads differently and isn't handled."""
+def load_graphics():
+    p = os.path.join(GFX, 'graphics.json')
+    by_archive = {}
+    for g in json.load(open(p)) if os.path.exists(p) else []:
+        by_archive.setdefault(g['archive'], []).append(g)
+    return by_archive
+
+
+def patch_graphics(path, gs):
+    """Return {entry index: new stored bytes} for the graphics edits of one archive."""
+    from PIL import Image
+    b = open(path, 'rb').read()
+    offs = struct.unpack_from(f'<{struct.unpack_from("<I", b, 0)[0] + 1}I', b, 4)
+    out = {}
+    for k in sorted({g['entry'] for g in gs}):
+        e = bytearray(lzss.decompress(b, offs[k]))
+        recs, p = [], 0
+        while p + 20 <= len(e):
+            n, x, y, w, h = struct.unpack_from('<IHHHH', e, p + 8)
+            recs.append((p + 20, w * 2, h))
+            p += 8 + n
+        for g in (g for g in gs if g['entry'] == k):
+            po, w, h = recs[g['record']]
+            if hashlib.sha1(e[po:po + w * h]).hexdigest()[:8] != g['src']:
+                raise BuildError(f'{g["png"]}: the original pixels have changed')
+            im = Image.open(os.path.join(GFX, g['png']))
+            if im.mode != 'P' or im.size != (w, h):
+                raise BuildError(f'{g["png"]}: want a {w}x{h} palettized PNG')
+            e[po:po + w * h] = im.tobytes()
+        block = lzss.compress(bytes(e))
+        if lzss.decompress(block) != bytes(e):
+            raise BuildError(f'{os.path.basename(path)} entry {k}: LZSS round trip failed')
+        out[k] = block
+    return out
+
+
+def rebuild_archive(path, entry0, replace=None):
+    """Repack a .J with a new entry 0 (None keeps it) and any other entries replaced. Checked
+    to give back the original byte for byte for every EVE, CNT and CAL archive; TALK.J pads
+    differently and isn't handled."""
     if os.path.basename(path) == 'TALK.J':
         raise BuildError('TALK.J repacking is not supported')
     b = open(path, 'rb').read()
     n = struct.unpack_from('<I', b, 0)[0]
     offs = struct.unpack_from(f'<{n + 1}I', b, 4)
-    entries = [entry0] + [b[offs[i]:offs[i + 1]] for i in range(1, n)]
+    replace = replace or {}
+    entries = [entry0 if entry0 is not None else b[offs[0]:offs[1]]]
+    entries += [replace.get(i, b[offs[i]:offs[i + 1]]) for i in range(1, n)]
     head = 4 + 4 * (n + 1)
     out, pos = bytearray(), head
     new_offs = []
@@ -255,13 +302,16 @@ def main():
     shutil.rmtree(STAGE, ignore_errors=True)
     os.makedirs(os.path.join(STAGE, 'A'))
     edits = load_edits()
+    graphics = load_graphics()
+    for a in graphics:
+        edits.setdefault(a, [])
     staged = {}
     exe = bytearray(open(os.path.join(DISC, EXE_NAME), 'rb').read())
     try:
         for src, es in sorted(edits.items()):
-            if not es:
+            if not es and src not in graphics:
                 continue
-            dump = json.load(open(os.path.join(ROOT, 'rips/text', src + '.json'), encoding='utf-8'))
+            dump = json.load(open(os.path.join(ROOT, 'rips/text', src + '.json'), encoding='utf-8')) if es else None
             if src == 'EXE':
                 pool = patch_exe(exe, es, dump)
                 if pool:
@@ -269,13 +319,15 @@ def main():
                     print(f'EXE: {len(es)} edits, {len(pool)} bytes in the pool')
                 continue
             path = os.path.join(DISC, 'A', src + '.J')
-            new0 = patch_script(src, dumptext.script_of(path), es, dump)
-            blob = rebuild_archive(path, new0)
+            new0 = patch_script(src, dumptext.script_of(path), es, dump) if es else None
+            gs = graphics.get(src, [])
+            blob = rebuild_archive(path, new0, patch_graphics(path, gs) if gs else None)
             dst = os.path.join(STAGE, 'A', src + '.J')
             open(dst, 'wb').write(blob)
             staged[src + '.J'] = dst
             old_s, new_s = -(-os.path.getsize(path) // SECTOR), -(-len(blob) // SECTOR)
-            print(f'{src}: {len(es)} edits, {os.path.getsize(path)} -> {len(blob)} bytes'
+            print(f'{src}: {len(es)} edits' + (f', {len(gs)} graphics' if gs else '')
+                  + f', {os.path.getsize(path)} -> {len(blob)} bytes'
                   + (f' ({old_s} -> {new_s} sectors)' if new_s != old_s else ''))
         exe_path = os.path.join(STAGE, EXE_NAME)
         open(exe_path, 'wb').write(exe)        # sized now; the file tables are patched below
