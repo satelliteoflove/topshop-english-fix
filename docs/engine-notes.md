@@ -96,7 +96,9 @@ is likely why EVE_077's rules text was never finished and why EVE_073's dead end
 hasn't been seen.
 
 The sale descriptions in the table (-20/30/40%) don't match what the sale scripts announce
-(30/50/70% off); which is right is a question for the code that applies them.
+(30/50/70% off). The scripts are right: op 0x18d (80082748) sets the store price percentage
+(+0xe) to 70, 50 or 30. The seasonal bytes run April to March (85 85 81 81 86 81 82 87 83 80
+88 84), so event 84, 総決算, is the Japanese fiscal year-end sale in March.
 
 ## Loading
 
