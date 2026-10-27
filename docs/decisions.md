@@ -1,7 +1,23 @@
+# Translation decisions
+
+Choices made during the 2026-10 translation pass, so nobody has to guess at them or
+suggest undoing them.
+
+## Changed, and why this way
+
+- **Event 84 is the "Clearance Sale."** The Japanese 総決算 is a year-end clearance (March
+  ends the business year in Japan), and the US release called it "Final Sale". I chose
+  "Clearance Sale" because it's the version American players will recognize most readily.
+  The picture was redrawn to match (graphics/EVE_084_e2_r4.png).
+- **The event 84 picture sits off-center.** "Clearance" is longer than "Final sale", and
+  centered it ran under the information desk girl's hat. I chose to move the whole sign
+  14 pixels left rather than shift the text inside the sign, because text off-center on
+  its card was more jarring than a card slightly off-center on the screen.
+
 # Left as they are, on purpose
 
 Things a careful player or a later contributor might flag, which were looked at and
-deliberately not changed. Decided during the 2026-10 translation pass.
+deliberately not changed.
 
 ## Graphics
 
@@ -16,9 +32,10 @@ deliberately not changed. Decided during the 2026-10 translation pass.
   text stays and the mismatch with it.
 - **Event 76's card and picture say "Miss"** and the text box says "Nothing happens."
   They read fine together.
-- **Shop names** stay as they are, in the text as well as on the signs, because changing
-  them means editing the sign graphics. That includes "Fruits Market", the "DX" names and
-  "Abdominal" (a kind of massage, not a body part).
+- **Shop names** stay as they are, in the text as well as on the signs. Editing them would
+  mean redrawing the sign graphics, but that's not the main reason. The shop names are a
+  big part of the game's feel and of what makes it unique, so they stay. That includes
+  "Fruits Market", the "DX" names and "Abdominal" (a kind of massage, not a body part).
 - **Japanese drawn into art the player never sees:** the shop signs in the cut 1–4% price
   events (4–7, 20–23), the cut time-skip pictures (55–57), both quiz pictures (73, 77),
   BG_M01 (an old January picture with 1月 and 賀), and the Tenant Wars logo the boot
