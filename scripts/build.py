@@ -93,21 +93,52 @@ POOL, POOL_END = 0x801f0000, 0x801fa000
 GAME_ENTRY = 0x8008dc04
 
 
+def block_copies(code, sites):
+    """Sites that copy the string into a buffer inline: the compiler unrolls the copy for
+    the literal's exact length (e.g. 46 bytes for a 45-character string), so a longer
+    string gets cut off with no NUL. Spotted as a load based on the register the
+    reference just set, within the next few instructions, before a jump or anything else
+    writes that register."""
+    found = []
+    for kind, site, lui in sites:
+        if kind not in ('addiu', 'ori'):
+            continue
+        o = site - EXE_BASE
+        reg = (struct.unpack_from('<I', code, o)[0] >> 16) & 31
+        for k in range(1, 9):
+            w = struct.unpack_from('<I', code, o + 4 * k)[0]
+            op, rs, rt, rd = w >> 26, (w >> 21) & 31, (w >> 16) & 31, (w >> 11) & 31
+            if 0x20 <= op <= 0x26 and rs == reg:
+                found.append(site); break
+            if op in (2, 3) or (op == 0 and w & 0x3f in (8, 9)):      # j, jal, jr, jalr
+                break
+            if (op == 0 and rd == reg) or ((8 <= op <= 0xf or 0x20 <= op <= 0x26) and rt == reg):
+                break
+    return found
+
+
 def patch_exe(exe, edits, dump):
     """Patch strings in place where they fit; return the pool bytes for the rest."""
     from exerefs import Refs
     by_id = {e['id']: e for e in dump}
-    refs = None
+    code = bytes(open(os.path.join(DISC, EXE_NAME), 'rb').read())
+    refs = Refs(code)
     pool = bytearray()
     for e in edits:
         orig = by_id.get(e['id']); check_src(e, orig)
         a = int(e['id'].split(':')[1], 16)
         new = encode(e['text'])
+        old = len(encode(orig['text']))
+        if len(new) > old:
+            copies = block_copies(code, refs.find(a))
+            if copies:
+                raise BuildError(f'{e["id"]}: {len(new)} bytes, but the code at '
+                                 f'{", ".join("%x" % s for s in copies)} copies exactly the '
+                                 f'original {old} (+NUL); keep it to {old}')
         if len(new) + 1 <= orig['room']:
             o = a - EXE_BASE
             exe[o:o + orig['room']] = new + b'\0' * (orig['room'] - len(new))
             continue
-        refs = refs or Refs(bytes(open(os.path.join(DISC, EXE_NAME), 'rb').read()))
         sites = refs.find(a)
         if not sites:
             raise BuildError(f'{e["id"]}: too long for its {orig["room"]} bytes, and nothing '

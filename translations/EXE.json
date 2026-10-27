@@ -26,7 +26,7 @@
  },
  {
   "id": "EXE:80012248",
-  "text": "A rival has blocked you from%Kopening new stores.",
+  "text": "A rival has blocked you%Kfrom opening stores.",
   "src": "1b167840"
  },
  {
@@ -111,7 +111,7 @@
  },
  {
   "id": "EXE:800136e0",
-  "text": "%K%K%CYou have no stores to deliver to.%E",
+  "text": "%K%K%CYou own no stores.%E",
   "src": "da22b717"
  },
  {

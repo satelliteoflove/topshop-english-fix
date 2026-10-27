@@ -197,3 +197,9 @@ executable text at 0x801f0000-0x801fa000.
 Every string with real text has a direct reference: 458 through pointer-table words and
 112 through `lui`/`addiu` pairs, none sharing a `lui` (`scripts/exerefs.py`). The rest
 (67, mostly byte soup) are reached by index or not at all and can only change in place.
+
+25 strings are copied into a buffer (mostly 0x800cde38) by an inline copy the compiler
+unrolled for the literal's exact length (lwl/lwr in 16-byte steps, then a byte tail),
+usually so a number or name can be appended. Repointing such a reference works, but a
+string longer than the original is cut off with no NUL. `build.block_copies` spots them as
+a load based on the register the reference just set.

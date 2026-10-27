@@ -13,6 +13,17 @@ suggest undoing them.
   centered it ran under the information desk girl's hat. I chose to move the whole sign
   14 pixels left rather than shift the text inside the sign, because text off-center on
   its card was more jarring than a card slightly off-center on the screen.
+- **Opening a store asks "Are you sure?"**, as in the original. For a while it said "Leave
+  without buying?", on the guess that it belonged to the shop because it sits beside the
+  shopping messages in the executable. It's only used by the two store pickers, and the
+  wrong question showed up in play.
+- **Two lines are shorter than they'd like to be:** "A rival has blocked you / from opening
+  stores." and "You own no stores." (delivering when your store list is empty). The game
+  copies each of them into a buffer with an inline copy the compiler sized to the original
+  string, 45 and 26 bytes. The first wordings were longer, so they were cut off mid-word
+  with whatever was in the buffer after them. Both now fit exactly. The build refuses an
+  edit that's longer than its original wherever the code copies it this way; 25 strings in
+  the executable are copied like this (`block_copies` in scripts/build.py).
 
 # Left as they are, on purpose
 
