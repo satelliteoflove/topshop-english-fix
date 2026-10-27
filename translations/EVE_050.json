@@ -3,5 +3,10 @@
   "id": "EVE_050:0028",
   "text": "【Information Desk】%KAttention, shoppers!",
   "src": "f5d40b1e"
+ },
+ {
+  "id": "EVE_050:006e",
+  "text": "An ordering mix-up left%Keach of %NMY's stores%Kwith one costly item.",
+  "src": "93488d64"
  }
 ]

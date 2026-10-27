@@ -3,5 +3,20 @@
   "id": "EVE_047:0028",
   "text": "【Owner】%KHere are my orders.",
   "src": "2a373e61"
+ },
+ {
+  "id": "EVE_047:004f",
+  "text": "%NMY can buy%Kan empty store.",
+  "src": "2788e28f"
+ },
+ {
+  "id": "EVE_047:007e",
+  "text": "You can't pick a store%Kin an area where you%Kalready own one.",
+  "src": "a71964d3"
+ },
+ {
+  "id": "EVE_047:00ca",
+  "text": "Press left or right%Kto pick another store.",
+  "src": "2dc8ae68"
  }
 ]
