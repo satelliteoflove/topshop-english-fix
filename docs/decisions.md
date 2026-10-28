@@ -56,6 +56,15 @@ suggest undoing them.
   PROGRAMMER, MAIN DESIGNER, DESIGNER, SUPERVISOR and EXECUTIVE PRODUCER. Every letter came
   from the same sheet, and each title has a whole strip to itself, so nothing was squeezed
   (scripts/redraw/credits_titles.py, docs/shots/credits_titles_before_after.png).
+- **Meower says "Behold! I am cat, hear me meow!"** before the fight with Dona (CNT03). It
+  plays on "I am woman, hear me roar," so it drops the "a" the original line had.
+- **Two story lines didn't fit their box in the original release,** and now do. Oilow's
+  scene (CNT06) had "You sell cats! / Even though they're robots, / I can't let this
+  happen!", three lines in a box that shows two, so the last one overwrote the second and
+  read "I can't let this happen!ts,". It's now "You sell cats! Robots or not, / I can't let
+  this happen!". Santa's (CNT09) ran to 42 columns of the box's 38, cutting off at "let's
+  bat" and garbling his name tag; the second line is now "in appreciation...let's
+  battle!". The first line stays, since the scene types it out in pieces before this box.
 - **The staff names stay in lower case,** as in the original, with their Kunrei-style
   spellings (simada, kadomatu, natuko, katuya). They're people's names.
 
