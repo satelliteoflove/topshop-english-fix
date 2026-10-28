@@ -43,6 +43,11 @@ runs buttons and screenshots each step (set `CUE` to test a built disc), and
 `scripts/sheet.py` tiles screenshots into one image. Save states keep the executable they
 were made on, so make fresh ones after a build that changes it.
 
+`scripts/storyscenes.py all` plays every Story Mode stage's opening scene and the exchange
+after winning it, saving each dialogue box, and puts them all on
+`rips/review/story-openings.html`. It needs a memory card that can start from stage 10
+(the `CARD` variable); the other commands, at its top, redo a single stage.
+
 ## Graphics
 
 `scripts/gfx.py DISCROOT OUTDIR` renders every image on an extracted disc to PNG (the
