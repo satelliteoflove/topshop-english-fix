@@ -6,5 +6,7 @@
  {"file": "SET2.SPC", "block": 11, "png": "SET2_b11.png", "src": "e009853d",
   "note": "Story Mode menu: \"From Bigining\" redrawn as \"From Beginning\", with the e of \"From Stage\" in the same sheet, shaded to match"},
  {"file": "SET2.SPC", "sprite": 68, "old": [720, 496, 20, 16], "new": [720, 496, 24, 16],
-  "note": "Widen that sprite from 80 to 96 pixels to show the longer word (the strip after it was empty)"}
+  "note": "Widen that sprite from 80 to 96 pixels to show the longer word (the strip after it was empty)"},
+ {"file": "CORNER.TIM", "block": 0, "bpp": 8, "png": "CORNER.png", "src": "8cea2245",
+  "note": "Title screen small print: a space in \"Agetec,Inc.\" (\"Inc.\" moves two pixels right)"}
 ]

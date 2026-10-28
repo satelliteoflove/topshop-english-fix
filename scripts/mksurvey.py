@@ -175,7 +175,7 @@ rows = [
     ('Staff credits', 'Job titles: ASSISTANCEPLANNER, MAINPROGRAMER, PROGRAMER, MAINDESINGER, DESINGER, SUPERVISER, EXECTIVEPRODUCER', 'Yes, after the story', '<span class="tag new">needs a decision</span>'),
     ('Title screen', 'Small print: “TOP SHOP and the and TOP SHOP logo are trademarks…”', 'Yes, every boot', '<span class="tag new">needs a decision</span>'),
     ('Story chapter titles', 'Mixed capitals: “Middle of the ocean”, “Big brother” beside “Frog Prince”, “Magic Man”', 'Yes', '<span class="tag note">optional</span>'),
-    ('Opening, publisher line', '“Published by Agetec,Inc.” has no space after the comma', 'Yes', '<span class="tag note">optional</span>'),
+    ('Title screen', 'Small print: “Agetec,Inc.”, now “Agetec, Inc.”', 'Yes, every boot', '<span class="tag ok">redrawn</span>'),
     ('Free Play setup menu', '“Wining Conditions”, “Totalmoney”', 'Yes', '<span class="tag ok">left as is</span>'),
     ('Event 84 picture', '“Final sale” art, text now says “Clearance Sale”', 'Yes', '<span class="tag ok">art redrawn</span>'),
     ('Event 87 picture', 'Art says “AUTUMN SALE”, text says “Fall Sale”', 'Yes', '<span class="tag ok">left as is</span>'),
@@ -184,6 +184,7 @@ rows = [
     ('Results sheet', '順位発表 (“ranking announcement”) left in the art', 'No, the screen uses “RESULT”', '<span class="tag ok">unused</span>'),
     ('Name entry sheet', 'Hiragana and katakana with their mode buttons', 'No, US name entry is A–Z only', '<span class="tag ok">unused</span>'),
     ('SHO4L4 shop picture', 'An early burger shop with イチ…バーガー on the sign', 'No, not in the file table', '<span class="tag ok">unused</span>'),
+    ('Opening sheet (OPEN2)', '“Published by Agetec,Inc.” and “©KID 1999,2000,2001”', 'No, the title never draws them', '<span class="tag ok">unused</span>'),
     ('Credits, STAFF0', 'Staff names in kanji', 'No, the credits use the romanized names', '<span class="tag ok">unused</span>'),
     ('Boot, cut events, quizzes', 'Tenant Wars logo; Japanese in events 4–7, 20–23, 55–57, 73, 77; BG_M01', 'No', '<span class="tag ok">unused</span>'),
 ]
@@ -217,15 +218,15 @@ a('<h3>The title screen\'s small print</h3>')
 a('<p>The title picture (<code>CORNER.TIM</code>) is on screen at every boot, and its trademark line says “TOP SHOP and the and TOP SHOP logo are trademarks of Agetec,Inc.” '
   'The type is tiny, two lines of about 5-pixel text, so redrawing it means matching that font by hand.</p>')
 a(fig(legal, 'Title small print', 'The bottom of the title picture (3×).'))
+a('<p><span class="tag ok">redrawn</span> The same line ended “Agetec,Inc.”, with the comma running into the I. “Inc.” now sits two pixels further right, the gap between the other words on that line (docs/decisions.md). '
+  '“and the and” is still to be decided.</p>')
+a(fig(load(SH + 'agetec_title_before_after.png'), 'Agetec, Inc. before and after', 'Before and after in the emulator: the end of the line (5×) and the whole title screen (1×).'))
 
 a('<h2>Optional</h2>')
 a('<h3>Story chapter titles</h3>')
 a('<p>Each story stage opens with a title card. Their capitals are mixed: “Cactus Boy”, “Magic Man”, “Frog Prince”, “Become a Fan!” and “I am Samurai Man” beside '
   '“Flabby thing”, “Big brother”, “Little kid” and “Middle of the ocean”. They read fine either way.</p>')
 a(fig(titles, 'Chapter titles', 'All ten chapter titles, from the menu sheets (2×).'))
-a('<h3>“Published by Agetec,Inc.”</h3>')
-a('<p>The opening\'s publisher line has no space after the comma, and neither does the title screen\'s small print. Barely noticeable.</p>')
-a(fig(publisher, 'Publisher line', 'The opening line (2×) and the same words on TIT_A, the α logo picture (3×).'))
 
 a('<h2>Already decided</h2>')
 a('<p>These were on the first version of this page, and the reasons are in docs/decisions.md.</p>')
@@ -248,6 +249,12 @@ a('<h3>The SHO4L4 shop picture</h3>')
 a('<p>Four files named SHO4L4 (with a letter O), dated January 1999, show an early burger shop with Japanese on the sign. '
   'The game finds its files through a table in the executable, and no entry points at them. The real one is SH04L4, the Burger Shop.</p>')
 a(fig(sho4, 'SHO4L4', 'SHO4L4_1 and _2 (2×).'))
+a('<h3>The publisher line and copyright in the opening sheet</h3>')
+a('<p>The opening sheet (<code>OPEN2.SPC</code>) has “Published by Agetec,Inc.” and “©KID 1999,2000,2001” as sprites. Tenant Wars draws its “©KID 1998” from this sheet at the bottom of the title screen; '
+  'the US title draws “A1 Games” in that place, and the copyright and trademark text is part of the title picture. '
+  'Watching the sprite table in the emulator through the boot, the title, the attract demo and back, the game reads the entries for “A1 Games” and “PRESS START BUTTON” but never these two, and nothing in the executable asks for them. '
+  'TIT_A, a picture that wasn\'t seen in my runs, has the same “Agetec,Inc.”.</p>')
+a(fig(publisher, 'Publisher line', 'The publisher line (2×) and the same words on TIT_A (3×).'))
 a('<h3>Kanji staff names, the Tenant Wars logo</h3>')
 a(row(fig(staff0, 'Kanji names', 'STAFF0: the staff in kanji. The US credits show the romanized names instead.'),
       fig(tw_logo, 'Tenant Wars logo', 'OPEN4: the テナントウォーズ logo, loaded at boot but not shown.')))
@@ -261,7 +268,7 @@ a('<h2>Every graphic with text</h2>')
 a('<p>For reference and later review: every image on the disc with words in it, by where it appears. Rendered from the disc, not from the screen, so a few sheets hold pieces that are put together in play.</p>')
 a('<h3>Boot, title and loading</h3>')
 a(fig(boot, 'Boot pictures', 'Full-screen pictures. A1, KID and the title are seen at boot; TIT_A and WAIWAI KID weren\'t seen in my runs.'))
-a(fig(open2, 'Opening sprites', 'Opening sprites: “A1 Games”, “PRESS START BUTTON”, the publisher line, the copyright and the disclaimer.'))
+a(fig(open2, 'Opening sprites', 'Opening sprites: “A1 Games”, “PRESS START BUTTON”, the disclaimer, and the publisher line and copyright that are never drawn.'))
 a('<h3>Menus</h3>')
 for n, im in menus:
     a(fig(im, n, f'<code>{n.split("_")[0]}.SPC</code> sheet {n.split("_")[1]} (2×).'))

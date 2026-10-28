@@ -37,6 +37,9 @@ suggest undoing them.
   recoloured to the shading of this line. The sprite was widened from 80 to 96 pixels to
   fit; the game draws it left-aligned, so nothing else moves, and the strip it uncovers was
   empty (scripts/redraw/from_beginning.py, docs/shots/from_beginning_before_after.png).
+- **The title screen's small print says "Agetec, Inc."** The comma ran into the I. "Inc."
+  moved two pixels right, the gap between the other words on that line, over plain
+  background (scripts/redraw/agetec_title.py, docs/shots/agetec_title_before_after.png).
 
 # Left as they are, on purpose
 
@@ -60,6 +63,10 @@ deliberately not changed.
   mean redrawing the sign graphics, but that's not the main reason. The shop names are a
   big part of the game's feel and of what makes it unique, so they stay. That includes
   "Fruits Market", the "DX" names and "Abdominal" (a kind of massage, not a body part).
+- **"Published by Agetec,Inc." and "©KID 1999,2000,2001"** in the opening sheet (OPEN2.SPC).
+  The title screen never draws them: the copyright and trademark text is part of the title
+  picture, and "A1 Games" sits where Tenant Wars put its "©KID 1998". The same goes for
+  TIT_A, a picture with "Agetec,Inc." that wasn't seen in play.
 - **Japanese drawn into art the player never sees:** the shop signs in the cut 1–4% price
   events (4–7, 20–23), the cut time-skip pictures (55–57), both quiz pictures (73, 77),
   BG_M01 (an old January picture with 1月 and 賀), and the Tenant Wars logo the boot

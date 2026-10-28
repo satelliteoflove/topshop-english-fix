@@ -40,7 +40,8 @@ with a PNG of 4-bit (or 8-bit) indices the size of the block in pixels, and its 
 table, whose width and height are what the game draws (it multiplies the width by 4 or 2
 when it loads the sheet), by sprite:
   {"file": "SET2.SPC", "sprite": 68, "old": [720, 496, 20, 16], "new": [720, 496, 24, 16]}
-giving the sprite's video RAM x, y, w and h before and after.
+giving the sprite's video RAM x, y, w and h before and after. A plain .TIM file (no LZSS,
+no sprite table) takes the same image entries, with "block": 0 for its picture.
 
 The same file can hold script byte patches that go with a picture, e.g. moving it:
   {"archive": "EVE_084", "script": "03bb", "old": "0040", "new": "0032"}
@@ -281,16 +282,26 @@ def patch_graphics(path, gs):
 
 
 def patch_sheet(path, gs):
-    """Return the new stored bytes of a sprite sheet (.SPC) with its graphics edits."""
+    """Return the new stored bytes of a sprite sheet (.SPC) or a .TIM with its graphics
+    edits."""
     from PIL import Image
     name = os.path.basename(path)
-    e = bytearray(lzss.decompress(open(path, 'rb').read()))
-    n = struct.unpack_from('<I', e, 0)[0]
-    blocks, p = [], 4 + 16 * n
-    while p + 20 <= len(e):
-        tag, flags, size, x, y, w, h = struct.unpack_from('<IIIHHHH', e, p)
-        blocks.append((p + 20, w * 2, h, flags))
-        p += 8 + size
+    tim = name.upper().endswith('.TIM')
+    raw = open(path, 'rb').read()
+    e = bytearray(raw if tim else lzss.decompress(raw))
+    blocks = []
+    if tim:
+        flags = struct.unpack_from('<I', e, 4)[0]
+        p = 8 + (struct.unpack_from('<I', e, 8)[0] if flags & 8 else 0)
+        size, x, y, w, h = struct.unpack_from('<IHHHH', e, p)
+        blocks.append((p + 12, w * 2, h, flags))
+    else:
+        n = struct.unpack_from('<I', e, 0)[0]
+        p = 4 + 16 * n
+        while p + 20 <= len(e):
+            tag, flags, size, x, y, w, h = struct.unpack_from('<IIIHHHH', e, p)
+            blocks.append((p + 20, w * 2, h, flags))
+            p += 8 + size
     for g in gs:
         if g['kind'] == 'sprite':
             o = 4 + 16 * g['sprite'] + 8
@@ -311,6 +322,8 @@ def patch_sheet(path, gs):
                 raise BuildError(f'{g["png"]}: 4-bit pixels only')
             px = bytes(px[i] | px[i + 1] << 4 for i in range(0, len(px), 2))
         e[po:po + wb * h] = px
+    if tim:
+        return bytes(e)
     block = lzss.compress(bytes(e))
     if lzss.decompress(block) != bytes(e):
         raise BuildError(f'{name}: LZSS round trip failed')
@@ -395,7 +408,7 @@ def main():
     staged = {}
     exe = bytearray(open(os.path.join(DISC, EXE_NAME), 'rb').read())
     try:
-        for src in sorted(a for a in graphics if a.upper().endswith('.SPC')):
+        for src in sorted(a for a in graphics if a.upper().endswith(('.SPC', '.TIM'))):
             path = os.path.join(DISC, 'A', src)
             blob = patch_sheet(path, graphics[src])
             dst = os.path.join(STAGE, 'A', src)
@@ -405,7 +418,7 @@ def main():
             print(f'{src}: {len(graphics[src])} graphics, {os.path.getsize(path)} -> {len(blob)} bytes'
                   + (f' ({old_s} -> {new_s} sectors)' if new_s != old_s else ''))
         for src, es in sorted(edits.items()):
-            if src.upper().endswith('.SPC'):
+            if src.upper().endswith(('.SPC', '.TIM')):
                 continue
             if not es and src not in graphics:
                 continue
