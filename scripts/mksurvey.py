@@ -171,7 +171,7 @@ rows = [
     ('Story Mode start menu', '“From Bigining”, now “From Beginning”', 'Yes', '<span class="tag ok">redrawn</span>'),
     ('Free Play, number of players', 'The picture for 0 CPUs said “COM なし” (Japanese for “no COM”), now “NO / COM”', 'Yes', '<span class="tag ok">redrawn</span>'),
     ('Staff credits', 'Job titles ASSISTANCEPLANNER, MAINPROGRAMER, PROGRAMER, MAINDESINGER, DESINGER, SUPERVISER, EXECTIVEPRODUCER, now spelled right', 'Yes, after the story', '<span class="tag ok">redrawn</span>'),
-    ('Title screen', 'Small print: “TOP SHOP and the and TOP SHOP logo are trademarks…”', 'Yes, every boot', '<span class="tag new">needs a decision</span>'),
+    ('Title screen', 'Small print: “TOP SHOP and the and TOP SHOP logo are trademarks…”, now “and the TOP SHOP logo”', 'Yes, every boot', '<span class="tag ok">redrawn</span>'),
     ('Story chapter titles', 'Mixed capitals: “Middle of the ocean”, “Big brother” beside “Frog Prince”, “Magic Man”', 'Yes', '<span class="tag note">optional</span>'),
     ('Title screen', 'Small print: “Agetec,Inc.”, now “Agetec, Inc.”', 'Yes, every boot', '<span class="tag ok">redrawn</span>'),
     ('Free Play setup menu', '“Wining Conditions”, “Totalmoney”', 'Yes', '<span class="tag ok">left as is</span>'),
@@ -218,11 +218,13 @@ a('<p>The names are in lower case and use Kunrei-style spellings (simada, kadoma
 a(fig(staff23, 'Credit names', 'The names (1×).'))
 a('<h3>The title screen\'s small print</h3>')
 a('<p>The title picture (<code>CORNER.TIM</code>) is on screen at every boot, and its trademark line says “TOP SHOP and the and TOP SHOP logo are trademarks of Agetec,Inc.” '
-  'The type is tiny, two lines of about 5-pixel text, so redrawing it means matching that font by hand.</p>')
+  'The type is tiny, two lines of about 5-pixel text, drawn into the picture rather than placed by code.</p>')
 a(fig(legal, 'Title small print', 'The bottom of the title picture (3×).'))
-a('<p><span class="tag ok">redrawn</span> The same line ended “Agetec,Inc.”, with the comma running into the I. “Inc.” now sits two pixels further right, the gap between the other words on that line (docs/decisions.md). '
-  '“and the and” is still to be decided.</p>')
+a('<p><span class="tag ok">redrawn</span> The same line ended “Agetec,Inc.”, with the comma running into the I. “Inc.” now sits two pixels further right, the gap between the other words on that line (docs/decisions.md).</p>')
 a(fig(load(SH + 'agetec_title_before_after.png'), 'Agetec, Inc. before and after', 'Before and after in the emulator: the end of the line (5×) and the whole title screen (1×).'))
+a('<p><span class="tag ok">redrawn</span> The second “and” was cut and the rest of the line moved 17 pixels left, so “the” and “TOP” are as far apart as “and” and “TOP” were. '
+  'The two lines don\'t share any pixel rows (the g in “rights” ends just above the second line), so neither line had to move.</p>')
+a(fig(load(SH + 'title_small_print_before_after.png'), 'and the and, before and after', 'Before and after in the emulator: the whole title screen (1×) and the small print (4×).'))
 
 a('<h2>Optional</h2>')
 a('<h3>Story chapter titles</h3>')

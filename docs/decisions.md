@@ -39,7 +39,12 @@ suggest undoing them.
   empty (scripts/redraw/from_beginning.py, docs/shots/from_beginning_before_after.png).
 - **The title screen's small print says "Agetec, Inc."** The comma ran into the I. "Inc."
   moved two pixels right, the gap between the other words on that line, over plain
-  background (scripts/redraw/agetec_title.py, docs/shots/agetec_title_before_after.png).
+  background (scripts/redraw/title_small_print.py, docs/shots/agetec_title_before_after.png).
+- **The same line says "TOP SHOP and the TOP SHOP logo"** instead of "and the and TOP SHOP
+  logo". The second "and" was cut and the rest of the line moved 17 pixels left, so "the"
+  and "TOP" sit as far apart as "and" and "TOP" did. The two lines of small print don't
+  share any pixel rows, so neither had to move (scripts/redraw/title_small_print.py,
+  docs/shots/title_small_print_before_after.png).
 - **The Free Play picture for 0 CPUs says "NO / COM"** instead of "COM なし". The O, C and
   M are the original brush lettering, "COM" moved to the second line and closed up to clear
   the character peeking in at the corner, and the N was drawn to match, with the M's soft
