@@ -68,7 +68,6 @@ def row(*figs):
 
 # ---------------------------------------------------------------- images
 from_big_art = up(crop(g('SET2_5.png'), (0, 238, 248, 254)), 2)
-com_shot = crop(load(SH + 'com_nashi.png'), (60, 120, 640, 440))
 com_art = up(crop(g('SET3_0.png'), (0, 0, 64, 200)), 2)
 credits_shot = crop(load(SH + 'credits_mainprogramer.png'), (120, 180, 520, 320))
 staff1 = up(crop(g('STAFF1_0.png'), (0, 0, 256, 176)), 2)
@@ -171,7 +170,7 @@ a('<h2>Summary</h2>')
 a('<table><tr><th>Where</th><th>What</th><th>On screen?</th><th>Status</th></tr>')
 rows = [
     ('Story Mode start menu', '“From Bigining”, now “From Beginning”', 'Yes', '<span class="tag ok">redrawn</span>'),
-    ('Free Play, number of players', 'The picture for 0 CPUs says “COM なし” (Japanese for “no COM”)', 'Yes', '<span class="tag new">needs a decision</span>'),
+    ('Free Play, number of players', 'The picture for 0 CPUs said “COM なし” (Japanese for “no COM”), now “NO / COM”', 'Yes', '<span class="tag ok">redrawn</span>'),
     ('Staff credits', 'Job titles: ASSISTANCEPLANNER, MAINPROGRAMER, PROGRAMER, MAINDESINGER, DESINGER, SUPERVISER, EXECTIVEPRODUCER', 'Yes, after the story', '<span class="tag new">needs a decision</span>'),
     ('Title screen', 'Small print: “TOP SHOP and the and TOP SHOP logo are trademarks…”', 'Yes, every boot', '<span class="tag new">needs a decision</span>'),
     ('Story chapter titles', 'Mixed capitals: “Middle of the ocean”, “Big brother” beside “Frog Prince”, “Magic Man”', 'Yes', '<span class="tag note">optional</span>'),
@@ -203,8 +202,10 @@ a('<h3>“COM なし” for zero CPU players</h3>')
 a('<p>In Free Play, with two or more people playing, the CPU count list shows a little picture for each choice. '
   'The one for CPU 0 still says COM なし, untouched from the Japanese release; the US release left the whole sheet (<code>SET3.SPC</code>) as it was. '
   'The other pictures only say “COM”, which reads fine, though the menu beside them says “CPU”.</p>')
-a(row(fig(com_shot, 'COM nashi on screen', 'On screen with CPU 0 highlighted (2×).'),
-      fig(com_art, 'CPU pictures', 'The CPU pictures in the sheet (2×).')))
+a('<p><span class="tag ok">redrawn</span> It now says “NO / COM”. The O, C and M are the original lettering, the N is drawn to match, '
+  'and the background behind the old words comes from the other CPU pictures, which share it (docs/decisions.md).</p>')
+a(fig(load(SH + 'no_com_before_after.png'), 'NO COM before and after', 'Before and after in the emulator, the panel close up, and the new N beside the M it copies.'))
+a(fig(com_art, 'CPU pictures', 'The original CPU pictures in the sheet (2×).'))
 a('<h3>Job titles in the staff credits</h3>')
 a('<p>The credits roll after the last story stage. The job titles are one image (<code>STAFF1.SPC</code>), and most of them are misspelled or run together: '
   'ASSISTANCEPLANNER, MAINPROGRAMER, PROGRAMER, MAINDESINGER, DESINGER (twice), SUPERVISER, EXECTIVEPRODUCER. '

@@ -40,6 +40,13 @@ suggest undoing them.
 - **The title screen's small print says "Agetec, Inc."** The comma ran into the I. "Inc."
   moved two pixels right, the gap between the other words on that line, over plain
   background (scripts/redraw/agetec_title.py, docs/shots/agetec_title_before_after.png).
+- **The Free Play picture for 0 CPUs says "NO / COM"** instead of "COM なし". The O, C and
+  M are the original brush lettering, "COM" moved to the second line and closed up to clear
+  the character peeking in at the corner, and the N was drawn to match, with the M's soft
+  edges. The background behind the old words came from the other three CPU pictures, which
+  share it, and the rest was grown from the panel's own hatching. "COM" stays rather than
+  "CPU" because every other picture in that row says "COM" (scripts/redraw/no_com.py,
+  docs/shots/no_com_before_after.png).
 
 # Left as they are, on purpose
 
