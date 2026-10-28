@@ -47,6 +47,12 @@ suggest undoing them.
   share it, and the rest was grown from the panel's own hatching. "COM" stays rather than
   "CPU" because every other picture in that row says "COM" (scripts/redraw/no_com.py,
   docs/shots/no_com_before_after.png).
+- **The staff credits' job titles are spelled right:** ASSISTANT PLANNER, MAIN PROGRAMMER,
+  PROGRAMMER, MAIN DESIGNER, DESIGNER, SUPERVISOR and EXECUTIVE PRODUCER. Every letter came
+  from the same sheet, and each title has a whole strip to itself, so nothing was squeezed
+  (scripts/redraw/credits_titles.py, docs/shots/credits_titles_before_after.png).
+- **The staff names stay in lower case,** as in the original, with their Kunrei-style
+  spellings (simada, kadomatu, natuko, katuya). They're people's names.
 
 # Left as they are, on purpose
 

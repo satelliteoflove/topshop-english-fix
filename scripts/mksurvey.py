@@ -69,7 +69,6 @@ def row(*figs):
 # ---------------------------------------------------------------- images
 from_big_art = up(crop(g('SET2_5.png'), (0, 238, 248, 254)), 2)
 com_art = up(crop(g('SET3_0.png'), (0, 0, 64, 200)), 2)
-credits_shot = crop(load(SH + 'credits_mainprogramer.png'), (120, 180, 520, 320))
 staff1 = up(crop(g('STAFF1_0.png'), (0, 0, 256, 176)), 2)
 staff23 = sheet([('STAFF2', g('STAFF2_0.png')), ('STAFF3', crop(g('STAFF3_0.png'), (0, 0, 256, 256)))], 2)
 corner = g('CORNER_0.png')
@@ -171,7 +170,7 @@ a('<table><tr><th>Where</th><th>What</th><th>On screen?</th><th>Status</th></tr>
 rows = [
     ('Story Mode start menu', '“From Bigining”, now “From Beginning”', 'Yes', '<span class="tag ok">redrawn</span>'),
     ('Free Play, number of players', 'The picture for 0 CPUs said “COM なし” (Japanese for “no COM”), now “NO / COM”', 'Yes', '<span class="tag ok">redrawn</span>'),
-    ('Staff credits', 'Job titles: ASSISTANCEPLANNER, MAINPROGRAMER, PROGRAMER, MAINDESINGER, DESINGER, SUPERVISER, EXECTIVEPRODUCER', 'Yes, after the story', '<span class="tag new">needs a decision</span>'),
+    ('Staff credits', 'Job titles ASSISTANCEPLANNER, MAINPROGRAMER, PROGRAMER, MAINDESINGER, DESINGER, SUPERVISER, EXECTIVEPRODUCER, now spelled right', 'Yes, after the story', '<span class="tag ok">redrawn</span>'),
     ('Title screen', 'Small print: “TOP SHOP and the and TOP SHOP logo are trademarks…”', 'Yes, every boot', '<span class="tag new">needs a decision</span>'),
     ('Story chapter titles', 'Mixed capitals: “Middle of the ocean”, “Big brother” beside “Frog Prince”, “Magic Man”', 'Yes', '<span class="tag note">optional</span>'),
     ('Title screen', 'Small print: “Agetec,Inc.”, now “Agetec, Inc.”', 'Yes, every boot', '<span class="tag ok">redrawn</span>'),
@@ -210,8 +209,10 @@ a('<h3>Job titles in the staff credits</h3>')
 a('<p>The credits roll after the last story stage. The job titles are one image (<code>STAFF1.SPC</code>), and most of them are misspelled or run together: '
   'ASSISTANCEPLANNER, MAINPROGRAMER, PROGRAMER, MAINDESINGER, DESINGER (twice), SUPERVISER, EXECTIVEPRODUCER. '
   'The titles are plain capitals on black, which would be easy to redraw in the same style.</p>')
-a(row(fig(credits_shot, 'Credits on screen', 'On screen at the end of the story (2×).'),
-      fig(staff1, 'Credit titles', 'The job titles (2×).')))
+a('<p><span class="tag ok">redrawn</span> The titles now read ASSISTANT PLANNER, MAIN PROGRAMMER, PROGRAMMER, MAIN DESIGNER, DESIGNER, SUPERVISOR and EXECUTIVE PRODUCER, '
+  'put together from the sheet\'s own letters (docs/decisions.md).</p>')
+a(fig(load(SH + 'credits_titles_before_after.png'), 'Credits before and after', 'Each corrected title as it rolls, before and after, in the emulator (2×).'))
+a(fig(staff1, 'Credit titles', 'The original job titles (2×).'))
 a('<p>The names are in lower case and use Kunrei-style spellings (simada, kadomatu, natuko, katuya), which are real romanizations, not mistakes. '
   '“hisakaz ogurau” looks like it may have lost or gained a letter, but these are people\'s names and I can\'t check them, so I\'d leave the names alone.</p>')
 a(fig(staff23, 'Credit names', 'The names (1×).'))

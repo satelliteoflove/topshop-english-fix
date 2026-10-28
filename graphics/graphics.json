@@ -10,5 +10,7 @@
  {"file": "CORNER.TIM", "block": 0, "bpp": 8, "png": "CORNER.png", "src": "8cea2245",
   "note": "Title screen small print: a space in \"Agetec,Inc.\" (\"Inc.\" moves two pixels right)"},
  {"file": "SET3.SPC", "block": 2, "bpp": 8, "png": "SET3_b2.png", "src": "d61acfa3",
-  "note": "Free Play, 0 CPUs: \"COM なし\" redrawn as \"NO / COM\" (scripts/redraw/no_com.py)"}
+  "note": "Free Play, 0 CPUs: \"COM なし\" redrawn as \"NO / COM\" (scripts/redraw/no_com.py)"},
+ {"file": "STAFF1.SPC", "block": 1, "png": "STAFF1_b1.png", "src": "f68afb29",
+  "note": "Staff credits: job titles spelled right (ASSISTANT PLANNER, MAIN PROGRAMMER, PROGRAMMER, MAIN DESIGNER, DESIGNER, SUPERVISOR, EXECUTIVE PRODUCER)"}
 ]
