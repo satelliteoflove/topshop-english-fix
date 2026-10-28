@@ -42,3 +42,16 @@ doesn't match. How each kind of string goes back in is described at the top of
 runs buttons and screenshots each step (set `CUE` to test a built disc), and
 `scripts/sheet.py` tiles screenshots into one image. Save states keep the executable they
 were made on, so make fresh ones after a build that changes it.
+
+## Graphics
+
+`scripts/gfx.py DISCROOT OUTDIR` renders every image on an extracted disc to PNG (the
+wrappers it understands are described at its top), and `gfx.frames` puts together the
+tiled frames of the animation archives. `scripts/mksurvey.py` builds
+`docs/graphics-survey.html` from those renders and the emulator screenshots in
+`docs/shots`:
+
+```sh
+python3 scripts/gfx.py rips/clean/topshop rips/gfx/us
+python3 scripts/mksurvey.py
+```

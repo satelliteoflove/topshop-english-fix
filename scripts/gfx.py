@@ -193,6 +193,42 @@ def draw(vram, raw, bpp, mine, b, cluts):
     return rgba, src
 
 
+def frames(archive):
+    """Put together the frames of an animation archive (EVE, CAL, CNT): entry 1 is a table
+    of 16-byte records (first tile, depth, columns, rows, CLUT x, CLUT y, 0, 0), entry 2 the
+    graphics. Frames are built from 16x16 tiles taken in video RAM order: the image blocks
+    in order, row by row within each. Returns a list of images."""
+    n = struct.unpack_from('<I', archive, 0)[0]
+    offs = struct.unpack_from(f'<{n + 1}I', archive, 4)
+    table = maybe_lzss(archive[offs[1]:offs[2]])
+    _, blocks = parse(maybe_lzss(archive[offs[2]:offs[3]]))
+    vram = np.zeros((512, 1024), np.uint16)
+    imgs = []
+    for b in blocks:
+        x, y, w, h, px = b['img']
+        vram[y:y + h, x:x + w] = np.frombuffer(px, '<u2').reshape(h, w)
+        if b['tag'] == 0x10:
+            imgs.append((x, y, w, h))
+    out = []
+    for i in range(0, len(table) - 15, 16):
+        first, depth, cols, rows, cx, cy, _, _ = struct.unpack_from('<8H', table, i)
+        if cols == 0 or cols > 40 or rows > 40:
+            continue
+        tw = 16 // (4 if depth == 0 else 2)   # video RAM units per tile
+        tiles = [(x + tx, y + ty) for x, y, w, h in imgs
+                 for ty in range(0, h - 15, 16) for tx in range(0, w - tw + 1, tw)]
+        pal = palette(vram, cx, cy, 16 if depth == 0 else 256)
+        f = np.zeros((rows * 16, cols * 16, 4), np.uint8)
+        for k in range(min(cols * rows, len(tiles) - first)):
+            vx, vy = tiles[first + k]
+            r, c = divmod(k, cols)
+            f[r * 16:r * 16 + 16, c * 16:c * 16 + 16] = pal[indices(vram[vy:vy + 16, vx:vx + tw].astype(np.uint32), depth)]
+        im = Image.new('RGBA', (cols * 16, rows * 16), GROUND + (255,))
+        im.alpha_composite(Image.fromarray(f, 'RGBA'))
+        out.append(im.convert('RGB'))
+    return out
+
+
 def sources(root):
     a = os.path.join(root, 'A')
     for f in sorted(os.listdir(a)):
