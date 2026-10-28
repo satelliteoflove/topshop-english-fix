@@ -316,6 +316,10 @@ def patch_sheet(path, gs):
         per = 2 if g.get('bpp', 4) == 4 else 1          # pixels per byte
         if im.mode != 'P' or im.size != (wb * per, h):
             raise BuildError(f'{g["png"]}: want a {wb * per}x{h} palettized PNG')
+        if len(im.getpalette() or []) < 3 * (16 if per == 2 else 256):
+            # Pillow saves a palette-less 'P' image with a 2-colour palette, squashing
+            # every index to 0 or 1
+            raise BuildError(f'{g["png"]}: its palette is too short to hold the game\'s indices')
         px = bytes(im.getdata())
         if per == 2:
             if max(px) > 15:
@@ -327,7 +331,9 @@ def patch_sheet(path, gs):
     block = lzss.compress(bytes(e))
     if lzss.decompress(block) != bytes(e):
         raise BuildError(f'{name}: LZSS round trip failed')
-    return block
+    # Our compressor often does better than the original's. Pad back to the original size
+    # (the decoder stops at the size in the block's header) so the file keeps its place.
+    return block + b'\0' * max(0, len(raw) - len(block))
 
 
 def rebuild_archive(path, entry0, replace=None):
