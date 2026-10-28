@@ -93,6 +93,12 @@ def start(n, out):
     return e
 
 
+def is_box(im):
+    """The box's blue fill covers over 90% of its inside; scenery stays under 30%."""
+    a = im.astype(int)
+    return ((a[..., 2] > a[..., 0] + 40) & (a[..., 2] > a[..., 1] + 40)).mean() > 0.6
+
+
 def boxes(e, out, until):
     """Save each new dialogue box until until(files loaded so far) is true; returns the count."""
     seen, prev, last, k, idle, t = [], None, None, 0, 0, 0
@@ -104,7 +110,7 @@ def boxes(e, out, until):
         im = np.asarray(e.image())[BOX]
         stable = prev is not None and np.array_equal(im, prev)
         prev = im
-        if not stable or im.mean() <= 20:   # moving, or no box on screen
+        if not stable or not is_box(im):    # moving, or no box on screen
             idle = 0; continue
         if last is None or not np.array_equal(im, last):
             e.shot(f'{out}f{k:03d}.png', scale=1); k += 1; last = im
