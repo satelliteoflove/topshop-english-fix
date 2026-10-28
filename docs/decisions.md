@@ -112,3 +112,6 @@ Small safe fixes to English that's already there are fine, even when it's rarely
   as they are.
 - **Story-mode scenes** (CNT00–19) only got grammar fixes. Their odd, very Japanese
   flavour ("Meow-wow-wow!", "Hurr!", "Myon myon!") is kept on purpose.
+- **The load screen's save labels** read "Story Mode  10 Stage  6 Year  4 Month", number
+  before word. The code writes each number before its word, so fixing the order means
+  changing code, and every player knows what the label means.
