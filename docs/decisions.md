@@ -32,6 +32,11 @@ suggest undoing them.
   delivers one to each of your stores, so it's "Deliver 1 costly item to each store". The
   two "Cut rival money" items became "Rivals lose 150/300 per store they own", since every
   rival pays for their own stores and the money doesn't go to you.
+- **"From Bigining" is now "From Beginning"** on the Story Mode menu. Every letter came
+  from the same sheet, so it's the game's own font: the e is the one from "From Stage",
+  recoloured to the shading of this line. The sprite was widened from 80 to 96 pixels to
+  fit; the game draws it left-aligned, so nothing else moves, and the strip it uncovers was
+  empty (scripts/redraw/from_beginning.py, docs/shots/from_beginning_before_after.png).
 
 # Left as they are, on purpose
 

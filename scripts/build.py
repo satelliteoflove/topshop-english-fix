@@ -34,6 +34,14 @@ The PNG is palettized with the game's own indices, the size of the record's pixe
 entry, overwrites the record's pixels, and LZSS-compresses it again. src is the first 8 hex
 digits of the sha1 of the original pixels.
 
+A sprite sheet (.SPC, one LZSS block) is edited the same way, by image block:
+  {"file": "SET2.SPC", "block": 11, "png": "SET2_b11.png", "src": "…"}
+with a PNG of 4-bit (or 8-bit) indices the size of the block in pixels, and its sprite
+table, whose width and height are what the game draws (it multiplies the width by 4 or 2
+when it loads the sheet), by sprite:
+  {"file": "SET2.SPC", "sprite": 68, "old": [720, 496, 20, 16], "new": [720, 496, 24, 16]}
+giving the sprite's video RAM x, y, w and h before and after.
+
 The same file can hold script byte patches that go with a picture, e.g. moving it:
   {"archive": "EVE_084", "script": "03bb", "old": "0040", "new": "0032"}
 applied in place to entry 0 at that offset of the original script (text edits never move
@@ -234,6 +242,10 @@ def load_graphics():
     p = os.path.join(GFX, 'graphics.json')
     by_archive = {}
     for g in json.load(open(p)) if os.path.exists(p) else []:
+        if 'file' in g:
+            g.setdefault('kind', 'sprite' if 'sprite' in g else 'image')
+            by_archive.setdefault(g['file'], []).append(g)
+            continue
         g.setdefault('kind', 'script' if 'script' in g else 'image')
         by_archive.setdefault(g['archive'], []).append(g)
     return by_archive
@@ -266,6 +278,43 @@ def patch_graphics(path, gs):
             raise BuildError(f'{os.path.basename(path)} entry {k}: LZSS round trip failed')
         out[k] = block
     return out
+
+
+def patch_sheet(path, gs):
+    """Return the new stored bytes of a sprite sheet (.SPC) with its graphics edits."""
+    from PIL import Image
+    name = os.path.basename(path)
+    e = bytearray(lzss.decompress(open(path, 'rb').read()))
+    n = struct.unpack_from('<I', e, 0)[0]
+    blocks, p = [], 4 + 16 * n
+    while p + 20 <= len(e):
+        tag, flags, size, x, y, w, h = struct.unpack_from('<IIIHHHH', e, p)
+        blocks.append((p + 20, w * 2, h, flags))
+        p += 8 + size
+    for g in gs:
+        if g['kind'] == 'sprite':
+            o = 4 + 16 * g['sprite'] + 8
+            if list(struct.unpack_from('<4H', e, o)) != g['old']:
+                raise BuildError(f'{name} sprite {g["sprite"]}: expected {g["old"]}')
+            struct.pack_into('<4H', e, o, *g['new'])
+            continue
+        po, wb, h, flags = blocks[g['block']]
+        if hashlib.sha1(e[po:po + wb * h]).hexdigest()[:8] != g['src']:
+            raise BuildError(f'{g["png"]}: the original pixels have changed')
+        im = Image.open(os.path.join(GFX, g['png']))
+        per = 2 if g.get('bpp', 4) == 4 else 1          # pixels per byte
+        if im.mode != 'P' or im.size != (wb * per, h):
+            raise BuildError(f'{g["png"]}: want a {wb * per}x{h} palettized PNG')
+        px = bytes(im.getdata())
+        if per == 2:
+            if max(px) > 15:
+                raise BuildError(f'{g["png"]}: 4-bit pixels only')
+            px = bytes(px[i] | px[i + 1] << 4 for i in range(0, len(px), 2))
+        e[po:po + wb * h] = px
+    block = lzss.compress(bytes(e))
+    if lzss.decompress(block) != bytes(e):
+        raise BuildError(f'{name}: LZSS round trip failed')
+    return block
 
 
 def rebuild_archive(path, entry0, replace=None):
@@ -346,7 +395,18 @@ def main():
     staged = {}
     exe = bytearray(open(os.path.join(DISC, EXE_NAME), 'rb').read())
     try:
+        for src in sorted(a for a in graphics if a.upper().endswith('.SPC')):
+            path = os.path.join(DISC, 'A', src)
+            blob = patch_sheet(path, graphics[src])
+            dst = os.path.join(STAGE, 'A', src)
+            open(dst, 'wb').write(blob)
+            staged[src] = dst
+            old_s, new_s = -(-os.path.getsize(path) // SECTOR), -(-len(blob) // SECTOR)
+            print(f'{src}: {len(graphics[src])} graphics, {os.path.getsize(path)} -> {len(blob)} bytes'
+                  + (f' ({old_s} -> {new_s} sectors)' if new_s != old_s else ''))
         for src, es in sorted(edits.items()):
+            if src.upper().endswith('.SPC'):
+                continue
             if not es and src not in graphics:
                 continue
             dump = json.load(open(os.path.join(ROOT, 'rips/text', src + '.json'), encoding='utf-8')) if es else None

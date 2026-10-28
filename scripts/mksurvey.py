@@ -67,7 +67,6 @@ def row(*figs):
 
 
 # ---------------------------------------------------------------- images
-from_big_shot = crop(load(SH + 'from_bigining.png'), (0, 270, 640, 400))
 from_big_art = up(crop(g('SET2_5.png'), (0, 238, 248, 254)), 2)
 com_shot = crop(load(SH + 'com_nashi.png'), (60, 120, 640, 440))
 com_art = up(crop(g('SET3_0.png'), (0, 0, 64, 200)), 2)
@@ -171,7 +170,7 @@ a('<p>The first version of this page only showed the menu graphics that happened
 a('<h2>Summary</h2>')
 a('<table><tr><th>Where</th><th>What</th><th>On screen?</th><th>Status</th></tr>')
 rows = [
-    ('Story Mode start menu', '“From Bigining” (should be “Beginning”)', 'Yes', '<span class="tag new">needs a decision</span>'),
+    ('Story Mode start menu', '“From Bigining”, now “From Beginning”', 'Yes', '<span class="tag ok">redrawn</span>'),
     ('Free Play, number of players', 'The picture for 0 CPUs says “COM なし” (Japanese for “no COM”)', 'Yes', '<span class="tag new">needs a decision</span>'),
     ('Staff credits', 'Job titles: ASSISTANCEPLANNER, MAINPROGRAMER, PROGRAMER, MAINDESINGER, DESINGER, SUPERVISER, EXECTIVEPRODUCER', 'Yes, after the story', '<span class="tag new">needs a decision</span>'),
     ('Title screen', 'Small print: “TOP SHOP and the and TOP SHOP logo are trademarks…”', 'Yes, every boot', '<span class="tag new">needs a decision</span>'),
@@ -196,8 +195,9 @@ a('<h2>Needs a decision</h2>')
 a('<h3>“From Bigining” on the Story Mode start menu</h3>')
 a('<p>Once a stage has been cleared, choosing Story Mode offers “From Bigining” or “From Stage N”. Every player who comes back to the story sees it. '
   'The words are drawn into the main menu sheet (<code>SET2.SPC</code>), next to “Continue” and “Off”, with room to spare on the line.</p>')
-a(row(fig(from_big_shot, 'From Bigining on screen', 'On screen in the patched build (2×).'),
-      fig(from_big_art, 'From Bigining in the art', 'In the menu sheet (2×).')))
+a('<p><span class="tag ok">redrawn</span> It now says “From Beginning”, put together from letters in the same sheet, with the sprite widened from 80 to 96 pixels (docs/decisions.md).</p>')
+a(fig(load(SH + 'from_beginning_before_after.png'), 'From Beginning before and after', 'Before and after in the emulator, with the cursor on each line (2×).'))
+a(fig(from_big_art, 'From Bigining in the art', 'The original in the menu sheet (2×).'))
 a('<h3>“COM なし” for zero CPU players</h3>')
 a('<p>In Free Play, with two or more people playing, the CPU count list shows a little picture for each choice. '
   'The one for CPU 0 still says COM なし, untouched from the Japanese release; the US release left the whole sheet (<code>SET3.SPC</code>) as it was. '
