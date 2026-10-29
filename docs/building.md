@@ -48,6 +48,19 @@ after winning it, saving each dialogue box, and puts them all on
 `rips/review/story-openings.html`. It needs a memory card that can start from stage 10
 (the `CARD` variable); the other commands, at its top, redo a single stage.
 
+`scripts/evtiming.py all` captures the text boxes of every event the game can pick, on a
+computer player's turn, and builds `rips/review/event-timing.html`, where each event can
+be played back with other wait values to choose how long its boxes stay up. It uses the
+Story Mode menu state that `storyscenes.py menu` saves, so make that first. The values
+chosen go in `events/timing.json`.
+
+## Reading the code
+
+`scripts/mips.py dis START END` disassembles the executable and `scripts/mips.py scan
+REGEX` searches its game code instruction by instruction (`--build` reads the patched
+one). `scripts/evscript.py` disassembles an event script, and `scripts/re/` has the Ghidra
+setup. What's been found is in `docs/engine-notes.md`.
+
 ## Graphics
 
 `scripts/gfx.py DISCROOT OUTDIR` renders every image on an extracted disc to PNG (the
