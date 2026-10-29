@@ -29,6 +29,8 @@ that up while leaving the game itself alone.
   misspelled job titles in the staff credits, the title screen's small print, and the
   Free Play picture for no computer players, which said "COM なし" in Japanese and now
   says "NO / COM".
+- On a computer player's turn, the events with the most to read keep their later text
+  boxes up for two seconds instead of one, so you can see what happened.
 
 ## What hasn't
 
@@ -42,7 +44,8 @@ setup screen, which is drawn into a graphic where there's no room for the extra 
 The full list, with the reasons, is in [docs/decisions.md](docs/decisions.md), so nobody
 has to wonder whether they were missed.
 
-This is a translation fix, so the game plays exactly as it always has.
+This is a translation fix, so the game plays exactly as it always has, apart from that
+event text timing.
 
 ## Applying the patch
 
@@ -72,8 +75,8 @@ The patched image should come out like this:
 | | |
 |---|---|
 | Size | 89,293,680 bytes |
-| CRC32 | `b60cbad5` |
-| MD5 | `30651afd2e1e7fd369068a19c1bbf7f4` |
+| CRC32 | `0fffca3a` |
+| MD5 | `3128250585b8bc0230b1e1322a64328b` |
 
 I've tested it in an emulator (Beetle PSX) from power-on through a good stretch of play,
 and every Story mode scene has been checked on screen. I haven't tried it on real hardware

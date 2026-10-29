@@ -46,7 +46,8 @@ no sprite table) takes the same image entries, with "block": 0 for its picture.
 The same file can hold script byte patches that go with a picture, e.g. moving it:
   {"archive": "EVE_084", "script": "03bb", "old": "0040", "new": "0032"}
 applied in place to entry 0 at that offset of the original script (text edits never move
-existing bytes), after checking the old bytes.
+existing bytes), after checking the old bytes. events/timing.json holds more of them, for
+how long an event's later text boxes stay up on a computer player's turn (docs/decisions.md).
 
 Files keep their place on the disc while they stay within their sector count; if one grows
 past it, every later file shifts and the executable's file tables (CD positions at
@@ -240,9 +241,11 @@ def patch_script(name, d, edits, dump):
 
 
 def load_graphics():
-    p = os.path.join(GFX, 'graphics.json')
     by_archive = {}
-    for g in json.load(open(p)) if os.path.exists(p) else []:
+    gs = []
+    for p in (os.path.join(GFX, 'graphics.json'), os.path.join(ROOT, 'events/timing.json')):
+        gs += json.load(open(p)) if os.path.exists(p) else []
+    for g in gs:
         if 'file' in g:
             g.setdefault('kind', 'sprite' if 'sprite' in g else 'image')
             by_archive.setdefault(g['file'], []).append(g)
@@ -450,7 +453,9 @@ def main():
             open(dst, 'wb').write(blob)
             staged[src + '.J'] = dst
             old_s, new_s = -(-os.path.getsize(path) // SECTOR), -(-len(blob) // SECTOR)
-            print(f'{src}: {len(es)} edits' + (f', {len(gs)} graphics' if gs else '')
+            ng = sum(g['kind'] != 'script' for g in gs)
+            print(f'{src}: {len(es)} edits' + (f', {ng} graphics' if ng else '')
+                  + (f', {len(gs) - ng} script patch' + 'es' * (len(gs) - ng > 1) if len(gs) > ng else '')
                   + f', {os.path.getsize(path)} -> {len(blob)} bytes'
                   + (f' ({old_s} -> {new_s} sectors)' if new_s != old_s else ''))
         exe_path = os.path.join(STAGE, EXE_NAME)

@@ -68,6 +68,14 @@ suggest undoing them.
   this happen!". Santa's (CNT09) ran to 42 columns of the box's 38, cutting off at "let's
   bat" and garbling his name tag; the second line is now "in appreciation...let's
   battle!". The first line stays, since the scene types it out in pieces before this box.
+- **Wordy events stay on screen longer on a computer player's turn.** Each event script
+  has two waits of its own: the first text box stays up 60 ticks (2 seconds) after its
+  voice clip, and every later box 30 ticks (1 second), which was too quick to read the
+  longer ones. In events 30–33, 47–50, 72, 75 and 80–88 the later boxes now get 60 ticks
+  too, one byte per script (events/timing.json). The others read fine at 1 second and
+  were left alone, as were the first boxes. On your own turns every box waits for your
+  button, as before. The CPU Speed option doesn't touch these waits, and nothing else in
+  the game reads them.
 - **The staff names stay in lower case,** as in the original, with their Kunrei-style
   spellings (simada, kadomatu, natuko, katuya). They're people's names.
 
