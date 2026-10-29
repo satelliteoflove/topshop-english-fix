@@ -100,6 +100,38 @@ The sale descriptions in the table (-20/30/40%) don't match what the sale script
 (+0xe) to 70, 50 or 30. The seasonal bytes run April to March (85 85 81 81 86 81 82 87 83 80
 88 84), so event 84, 総決算, is the Japanese fiscal year-end sale in March.
 
+## Event text timing
+
+How long an event's text boxes stay up is set by the event script, not by the executable.
+Script variables are halfwords at 0x801155d8 + 2n. Before a script runs, 8007cf20 copies
+the current player's entry of a per-player table (var 0xd4 + player) into var 0xd3: 0x10
+when that player is a computer (player record +1 nonzero), 0 otherwise. Var 0xc8 gets
+that player's buttons the same way (8007cf08). Var 0xf0 is the wait counter, saved and
+restored across a gosub. A tick is one pass of the loop, 2 frames.
+
+- **First box:** a loop of at least 30 ticks that also waits for the voice clip to finish
+  (op 0x39). Then a computer player's turn goes on once var 0xf0 reaches 60 (`0020 … 80f0
+  003c 0003`); on your own turn it waits for a button (`80c8 0700`).
+- **Every later box:** one subroutine, reached by gosub after each line:
+  `0021 80f0 0000; 0013 …; 0023 80f0 0001; 0020 … 80d3 0010 0006; 0020 … 80c8 0700 0007;
+  0032 0001; 0014; 0020 … 80f0 001e 0003`. On a computer's turn that's 30 ticks, 1 second;
+  on yours, a button.
+
+Op 0x20's compare types (table at 0x80018d28): 0 ==, 1 !=, 2 a>b, 3 a<b, 4 a>=b, 5 a<=b,
+6 (a&b)==b, 7 (a&b)==0.
+
+Every event the random picker can choose has exactly one of each wait, so the 60 and the 30
+are per event, not per box or global. Measured in the emulator on the original scripts, a
+first box is on screen 2.0-2.5 s and a later box about 1.5 s (the extra half second is the
+box opening and the line printing), except the middle boxes of events 47, 48 and 75, which
+take 1.0 s. Events 24-26, 30-33, 40-42, 47-50, 72, 75 and 80-88 have later boxes; the rest are
+a single box. Raising either value only lengthens a computer player's turn: the money
+changes still happen, and your own turns still wait for the button.
+
+The CPU Speed option (byte 0x800b2536, 1 = Fast, 0 = Normal) doesn't touch these waits.
+The patch raises the later-box wait to 60 in events 30-33, 47-50, 72, 75 and 80-88
+(events/timing.json, docs/decisions.md).
+
 ## Loading
 
 8001c958(index, dest, size, ...) and 8001cb5c(index, ...) queue a file by its index in
