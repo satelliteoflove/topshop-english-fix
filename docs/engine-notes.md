@@ -89,6 +89,11 @@ event number is stored at 0x800b2638 by one of two places:
 - 80044d34: when the flag at 0x800fe08f is set, the result of the event-select menu task
   (0x8006cecc, which shows "%CEvent:" and the description list).
 
+When the pencil lands on E, the player picks one of three face-down cards, but the card
+makes no difference. The picker runs once, at 80044c8c, before the cards are dealt, and
+its result goes to 0x800b2638 at 80044cb8; nothing in the card pick reads or changes it.
+In the emulator, the same saved state gave the same event whichever card was chosen.
+
 The US release changed two records of the random table: rows 44 and 47 were events 73
 (Chance Quiz) and 77 (Speed-up Quiz) in Japan, and are 76 ("・・・Whiff・・・", nothing
 happens) in the US, with the same odds. So neither quiz comes up at random in the US, which
@@ -171,9 +176,16 @@ into +0x18. Sales use values below 100 (80046104 treats < 100 as "on sale"). Ite
 Player +0x33 is a payday modifier: 1 (item 22, "Stop rival money") zeroes and 2 (item 21,
 "Money double") doubles the amount 80076270 computes for the "Payday!"/"Bonus!!" task
 (800579bc), which then clears it. "(Next turn)" in the US labels was wrong; it's the next
-payday. Player +0x34 is a pencil mode with expiry turn at +0x58; the spinner task (around
-800546a4) treats 3 (item 15, "Lower pencil movement") as spin at 0x400 instead of 0x2000
-from a fixed start, and stop at once on the press instead of coasting a random amount.
+payday. Player +0x34 is a pencil mode with expiry turn at +0x58, set by items 11, 12 and 15
+(8006f268, 8006f2b0, 8006f2f8) and cleared at 80049a58 once the turn passes it. The
+spinner task (around 800546a4) copies it to its own +4 and acts on it when the pencil
+stops (80054ac0):
+- 1 (item 11, "Rival pencil: 1s and 2s"): the result (0x800b2672) is 0 or 1, from where
+  the pencil stopped, so the rival moves 1 or 2.
+- 2 (item 12, "Rival pencil: Events only"): the result is always 8, the E.
+- 3 (item 15, "Slow pencil, instant stop"): the pencil spins at 0x400 instead of 0x2000
+  from a fixed start, and stops at once on the press instead of coasting a random amount.
+Mode 2 on your own record makes every roll an event, which is handy for testing them.
 Item 16 ("Reduce rival money 3/4") sets money to 3/4, not down by 3/4.
 
 A store's shelf is +6 (items stocked, at most +7) and eight 6-byte slots from +0x14: in
