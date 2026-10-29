@@ -1,0 +1,97 @@
+# Builds the patch from the original disc and keeps it as an artifact. Runs by hand
+# (Actions > build > Run workflow) and on pushes to main that change what goes into it.
+# It fails if the patched image's md5 isn't the one the README gives, so the README's
+# checksums can't drift from the edits.
+#
+# The original disc can't live in this repo. It's a release asset in a private repo:
+#   vars.DISC_REPO     owner/name of the private repo
+#   vars.DISC_TAG      the release there holding one .zip of the US .bin and .cue (zipped
+#                      because GitHub renames assets with spaces in them, which would
+#                      break the cue sheet)
+#   secrets.DISC_TOKEN fine-grained token with read access to that repo's contents
+name: build
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/**'
+      - 'scripts/build.py'
+      - 'scripts/dumptext.py'
+      - 'scripts/evscript.py'
+      - 'scripts/exerefs.py'
+      - 'scripts/lzss.py'
+      - 'scripts/mkpatch.py'
+      - 'translations/**'
+      - 'graphics/**'
+      - 'events/**'
+      - 'README.md'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+permissions:
+  contents: read
+
+env:
+  MKPSXISO_COMMIT: a6b11ea86e67c189137ac50a4066044b3fdb0525
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Packages
+        run: sudo apt-get update && sudo apt-get install -y xdelta3 python3-pil
+
+      - name: Cache mkpsxiso
+        id: tools
+        uses: actions/cache@v6
+        with:
+          path: ~/tools
+          key: tools-${{ env.MKPSXISO_COMMIT }}
+
+      - name: Build mkpsxiso
+        if: steps.tools.outputs.cache-hit != 'true'
+        run: |
+          set -eu
+          mkdir -p ~/tools
+          git clone -q https://github.com/Lameguy64/mkpsxiso.git /tmp/mkpsxiso
+          git -C /tmp/mkpsxiso checkout -q "$MKPSXISO_COMMIT"
+          git -C /tmp/mkpsxiso submodule update -q --init --recursive
+          cmake -S /tmp/mkpsxiso -B /tmp/mkpsxiso/build -DCMAKE_BUILD_TYPE=Release > /dev/null
+          cmake --build /tmp/mkpsxiso/build -j"$(nproc)" > /dev/null
+          cp /tmp/mkpsxiso/build/mkpsxiso /tmp/mkpsxiso/build/dumpsxiso ~/tools/
+
+      - name: Fetch the original disc
+        env:
+          GH_TOKEN: ${{ secrets.DISC_TOKEN }}
+        run: |
+          set -eu
+          gh release download "${{ vars.DISC_TAG }}" --repo "${{ vars.DISC_REPO }}" --dir "$RUNNER_TEMP/dl"
+          unzip -q "$RUNNER_TEMP"/dl/*.zip -d "$RUNNER_TEMP/disc"
+
+      - name: Build the patch
+        run: |
+          set -eu
+          cue=$(find "$RUNNER_TEMP/disc" -name "*.cue" | head -n1)
+          bin=$(find "$RUNNER_TEMP/disc" -name "*.bin" | head -n1)
+          ~/tools/dumpsxiso -l -x rips/clean/topshop -s rips/clean/topshop.xml "$cue" > /dev/null
+          MKPSXISO=~/tools/mkpsxiso python3 scripts/mkpatch.py "$bin"
+
+      - name: Check the README's checksum
+        run: |
+          set -eu
+          want=$(grep '^| MD5 | `' README.md | tail -n1 | cut -d'`' -f2)   # the patched image's row
+          got=$(md5sum rips/iso/topshop-en.bin | cut -d' ' -f1)
+          echo "README: $want  built: $got"
+          [ "$want" = "$got" ]
+
+      - name: Upload the patch
+        uses: actions/upload-artifact@v7
+        with:
+          name: topshop-english-fix-${{ github.sha }}
+          path: rips/patch/
+          retention-days: 30
