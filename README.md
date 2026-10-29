@@ -72,8 +72,8 @@ The patched image should come out like this:
 | | |
 |---|---|
 | Size | 89,293,680 bytes |
-| CRC32 | `02141a7a` |
-| MD5 | `5937e156f7d57b9fa17326a8e7e50352` |
+| CRC32 | `b60cbad5` |
+| MD5 | `30651afd2e1e7fd369068a19c1bbf7f4` |
 
 I've tested it in an emulator (Beetle PSX) from power-on through a good stretch of play,
 and every Story mode scene has been checked on screen. I haven't tried it on real hardware

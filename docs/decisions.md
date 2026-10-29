@@ -58,6 +58,9 @@ suggest undoing them.
   (scripts/redraw/credits_titles.py, docs/shots/credits_titles_before_after.png).
 - **Meower says "Behold! I am cat, hear me meow!"** before the fight with Dona (CNT03). It
   plays on "I am woman, hear me roar," so it drops the "a" the original line had.
+- **Meower calls Merlin a "phony magician"** (CNT01), not an "imposter". The Japanese is
+  イカサマ魔導士, a sham sorcerer: Merlin isn't pretending to be anyone else, he's a fake
+  "Great Magician", the title he gives himself a few lines earlier.
 - **Two story lines didn't fit their box in the original release,** and now do. Oilow's
   scene (CNT06) had "You sell cats! / Even though they're robots, / I can't let this
   happen!", three lines in a box that shows two, so the last one overwrote the second and
