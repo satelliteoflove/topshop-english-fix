@@ -72,9 +72,10 @@ The patched image should come out like this:
 | CRC32 | `0fffca3a` |
 | MD5 | `3128250585b8bc0230b1e1322a64328b` |
 
-I've tested it in an emulator (Beetle PSX) from power-on through a good stretch of play,
-and every Story mode scene has been checked on screen. I haven't tried it on real hardware
-yet.
+I personally reviewed and approved every change to the text and graphics, and checked
+every event and every Story mode scene on screen. I've tested it in emulators (Beetle PSX
+and DuckStation) from power-on through a good stretch of play, but I haven't tried it on
+real hardware yet.
 
 ## Building it yourself
 
