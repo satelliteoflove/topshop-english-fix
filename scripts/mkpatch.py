@@ -11,7 +11,7 @@ import hashlib, os, subprocess, sys, zlib
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 ORIG_MD5 = 'e886c77d61880e3ff655af46ac82c323'
-NAME = 'Board Game - Top Shop (English Fix)'
+NAME = 'Top Shop (English Fix)'
 
 
 def sums(path):

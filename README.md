@@ -1,6 +1,6 @@
-# Board Game - Top Shop: English Fix
+# Top Shop: English Fix
 
-Board Game - Top Shop has been one of my favorite PlayStation games for a long time. It's
+Top Shop has been one of my favorite PlayStation games for a long time. It's
 an honest, charming little board game similar to Monopoly, but with a few twists and an anime
 art style and plenty of Japanese flair. I have a lot of good memories of this game, and it's
 really satisfying for a budget title.
@@ -63,10 +63,10 @@ Apply `topshop-english-fix.xdelta` to the BIN with any xdelta3 patcher. On Windo
 Patcher works fine. From a command line:
 
 ```sh
-xdelta3 -d -s "Board Game - Top Shop.bin" topshop-english-fix.xdelta "Board Game - Top Shop (English Fix).bin"
+xdelta3 -d -s "Board Game - Top Shop.bin" topshop-english-fix.xdelta "Top Shop (English Fix).bin"
 ```
 
-Then use the included `Board Game - Top Shop (English Fix).cue` with the new BIN. If you
+Then use the included `Top Shop (English Fix).cue` with the new BIN. If you
 name the BIN something else, change the name inside the CUE to match.
 
 The patched image should come out like this:

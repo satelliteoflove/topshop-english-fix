@@ -155,7 +155,7 @@ a = H.append
 a('<!DOCTYPE html>\n<html lang="en"><head><meta charset="utf-8"><title>Top Shop: graphics survey</title>')
 a(f'<style>{CSS}</style></head><body><main>')
 a('<h1>Top Shop: graphics survey</h1>')
-a('<p class="sub">Board Game – Top Shop (SLUS-01333) compared with Tenant Wars (SLPS-01243). '
+a('<p class="sub">Top Shop (SLUS-01333) compared with Tenant Wars (SLPS-01243). '
   'First surveyed 2026-10-26; redone 2026-10-27 with every image on the disc decoded. '
   'What was left alone and why is in docs/decisions.md.</p>')
 
