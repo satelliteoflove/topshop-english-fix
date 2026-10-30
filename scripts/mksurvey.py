@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build docs/graphics-survey.html, the survey of every graphic on the disc.
+"""Build rips/review/graphics-survey.html, the survey of every graphic on the disc.
 
     python3 scripts/gfx.py rips/clean/topshop rips/gfx/us
     python3 scripts/mksurvey.py
@@ -7,7 +7,8 @@
 It reads the renders gfx.py writes to rips/gfx/us, the emulator screenshots in docs/shots
 and the month animations straight from the extracted disc, and inlines every picture, so
 the page opens with no other files. The text of the page is written out below; change it
-here, not in the HTML.
+here, not in the HTML. The page is made of the game's own art, so it stays out of the
+repository: build it from your own disc (docs/building.md).
 """
 import base64, io, json, os, glob, sys
 from PIL import Image, ImageDraw
@@ -309,5 +310,7 @@ a('<h2>Limits</h2>')
 a('<ul><li>Sheets are drawn with each sprite\'s palette where the file has a sprite table. Without one, the renderer uses the file\'s first palette, so some board tiles and face sheets show the wrong colours. None of those have text.</li>'
   '<li>The month animations, event pictures and story portraits are cut into 16-pixel tiles and put together by frame tables. I put the month frames together; the rival portraits only partly, which was enough to see they have no words.</li></ul>')
 a('</main></body></html>')
-open(R + 'docs/graphics-survey.html', 'w').write('\n'.join(H))
-print(os.path.getsize(R + 'docs/graphics-survey.html'), 'bytes')
+OUT = R + 'rips/review/graphics-survey.html'
+os.makedirs(os.path.dirname(OUT), exist_ok=True)
+open(OUT, 'w').write('\n'.join(H))
+print(OUT, os.path.getsize(OUT), 'bytes')

@@ -65,11 +65,17 @@ setup. What's been found is in `docs/engine-notes.md`.
 
 `scripts/gfx.py DISCROOT OUTDIR` renders every image on an extracted disc to PNG (the
 wrappers it understands are described at its top), and `gfx.frames` puts together the
-tiled frames of the animation archives. `scripts/mksurvey.py` builds
-`docs/graphics-survey.html` from those renders and the emulator screenshots in
-`docs/shots`:
+tiled frames of the animation archives.
+
+`scripts/mksurvey.py` builds a survey of every graphic on the disc: which ones have text
+in them, whether the game shows them, and what the patch did about each. It works from
+those renders and the emulator screenshots in `docs/shots`. It's made of the game's own
+art, so the repository doesn't include it, but anyone with the disc can make their own.
+After extracting the disc as above:
 
 ```sh
 python3 scripts/gfx.py rips/clean/topshop rips/gfx/us
-python3 scripts/mksurvey.py
+python3 scripts/mksurvey.py     # rips/review/graphics-survey.html
 ```
+
+It opens in any browser, with no other files needed.
