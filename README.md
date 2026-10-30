@@ -77,6 +77,21 @@ The patched image should come out like this:
 | CRC32 | `0fffca3a` |
 | MD5 | `3128250585b8bc0230b1e1322a64328b` |
 
+## How this was made
+
+I made this patch with Claude, Anthropic's AI model, working in Claude Code. Claude did the
+reverse engineering, wrote the tools that pull the text out of the game and put it back,
+and drafted the rewritten lines. I decided what should change and what should stay, and I
+reviewed and approved (or edited) every change to the text and graphics on screen in the
+game before it went in. Where a description says what an item or event actually does, that
+was checked against the game's code.
+
+This isn't a machine translation. The patch starts from the original English release and
+only changes what needed it, with the Japanese release as a reference where the English
+was unclear.
+
+The commit history shows the whole process, if you're curious.
+
 ## Building it yourself
 
 Everything that produced the patch is in this repository. [docs/building.md](docs/building.md)
