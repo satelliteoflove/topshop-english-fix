@@ -4,7 +4,7 @@
     mkpatch.py ORIGINAL.bin [--out rips/patch]
 
 ORIGINAL.bin must be the single-track US image (md5 e886c77d61880e3ff655af46ac82c323).
-Writes topshop-english.xdelta and a .cue for the patched image, and prints the patched
+Writes topshop-english-fix.xdelta and a .cue for the patched image, and prints the patched
 image's checksums.
 """
 import hashlib, os, subprocess, sys, zlib
@@ -32,7 +32,7 @@ def main():
         return 1
     new = os.path.join(ROOT, 'rips/iso/topshop-en.bin')
     os.makedirs(out, exist_ok=True)
-    patch = os.path.join(out, 'topshop-english.xdelta')
+    patch = os.path.join(out, 'topshop-english-fix.xdelta')
     if subprocess.call(['xdelta3', '-f', '-e', '-9', '-S', 'djw', '-s', orig, new, patch]):
         return 1
     with open(os.path.join(out, NAME + '.cue'), 'w') as f:

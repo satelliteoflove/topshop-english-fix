@@ -59,11 +59,11 @@ The patch only applies to this exact image:
 
 If your copy is a CHD or split some other way, convert it to a single BIN/CUE first.
 
-Apply `topshop-english.xdelta` to the BIN with any xdelta3 patcher. On Windows, Delta
+Apply `topshop-english-fix.xdelta` to the BIN with any xdelta3 patcher. On Windows, Delta
 Patcher works fine. From a command line:
 
 ```sh
-xdelta3 -d -s "Board Game - Top Shop.bin" topshop-english.xdelta "Board Game - Top Shop (English Fix).bin"
+xdelta3 -d -s "Board Game - Top Shop.bin" topshop-english-fix.xdelta "Board Game - Top Shop (English Fix).bin"
 ```
 
 Then use the included `Board Game - Top Shop (English Fix).cue` with the new BIN. If you
