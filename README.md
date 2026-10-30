@@ -2,8 +2,8 @@
 
 Board Game - Top Shop has been one of my favorite PlayStation games for a long time. It's
 an honest, charming little board game similar to Monopoly, but with a few twists and an anime
-art style and plenty of Japanese flair. I have a lot of fond memories of it, and it's really
-satisfying for a budget title.
+art style and plenty of Japanese flair. I have a lot of good memories of this game, and it's
+really satisfying for a budget title.
 
 The English release was always a bit rough, though. Menus and messages sometimes read
 awkwardly, there were typos here and there, and some of the event cards and point-exchange
