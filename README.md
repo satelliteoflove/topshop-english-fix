@@ -41,6 +41,11 @@ The full list, with the reasons, is in [docs/decisions.md](docs/decisions.md).
 
 Apart from that event text timing, the game plays exactly as it always has.
 
+I personally reviewed and approved every change to the text and graphics, and checked
+every event and every Story mode scene on screen. I've tested it in emulators (Beetle PSX
+and DuckStation) from power-on through a good stretch of play, but I haven't tried it on
+real hardware yet.
+
 ## Applying the patch
 
 You'll need your own copy of the US disc (SLUS-01333) as a single-track BIN/CUE image.
@@ -71,11 +76,6 @@ The patched image should come out like this:
 | Size | 89,293,680 bytes |
 | CRC32 | `0fffca3a` |
 | MD5 | `3128250585b8bc0230b1e1322a64328b` |
-
-I personally reviewed and approved every change to the text and graphics, and checked
-every event and every Story mode scene on screen. I've tested it in emulators (Beetle PSX
-and DuckStation) from power-on through a good stretch of play, but I haven't tried it on
-real hardware yet.
 
 ## Building it yourself
 
