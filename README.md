@@ -1,51 +1,45 @@
 # Board Game - Top Shop: English Fix
 
 Board Game - Top Shop has been one of my favorite PlayStation games for a long time. It's
-an odd, cheerful little board game about buying up stores in a department store, keeping
-their shelves stocked and hoping your rivals do their shopping with you. I have a lot of
-fond memories of it, and it has a charm I've never quite found anywhere else.
+an honest, charming little board game similar to Monopoly, but with a few twists and an anime
+art style and plenty of Japanese flair. I have a lot of fond memories of it, and it's really
+satisfying for a budget title.
 
-The English release was always a bit rough, though. Menus and messages read awkwardly,
-there were typos here and there, and some of the event cards and point-exchange items
-described something other than what actually happens. This patch is my attempt to clean
+The English release was always a bit rough, though. Menus and messages sometimes read
+awkwardly, there were typos here and there, and some of the event cards and point-exchange
+items had descriptions which weren't especially accurate. This patch is my attempt to clean
 that up while leaving the game itself alone.
 
 ## What's changed
 
-- Menus, shopping, deliveries, buying and selling stores, turn messages and the memory
-  card screens all read more naturally.
-- The points exchange list now says what each item really does. A few of them were
-  wrong in the original ("Next turn" for an effect that lasts until the next payday, for
-  one), and those were checked against the game's code.
-- Item names got spelling and plural fixes, and a few of the stranger Japanese-English
-  terms were made plainer.
-- The event cards were rewritten so they're clear about who's affected and how. The
-  information desk announcements open with "Attention, shoppers!"
-- The rival scenes in Story mode only got light grammar and punctuation fixes. They have
-  a lot of Japanese flavor, and I wanted to keep it. Two lines that ran past the edge of
-  their box in the original release now fit.
-- The March sale is now the "Clearance Sale", picture included.
-- A few other pictures were fixed as well: "From Bigining" on the Story mode menu, the
-  misspelled job titles in the staff credits, the title screen's small print, and the
-  Free Play picture for no computer players, which said "COM なし" in Japanese and now
-  says "NO / COM".
-- On a computer player's turn, the events with the most to read keep their later text
-  boxes up for two seconds instead of one, so you can see what happened.
+- Typos and grammar are fixed throughout: menus, shopping, event cards, the points
+  exchange, Story mode and the memory card screens.
+- Event cards and points-exchange items whose descriptions weren't accurate now say what
+  they actually do, checked against the game's disassembled code.
+- A few typos drawn into the pictures were fixed too, like "From Bigining" on the Story
+  mode menu and the job titles in the staff credits.
+- On a computer player's turn, the wordier events leave their text up a little longer, so
+  you can read what happened.
 
-## What hasn't
+The full list is in [docs/changes.md](docs/changes.md).
 
-The shop names are exactly as they were. Changing them would have meant redrawing the
-signs, but that wasn't really the reason. I love the feel of this game, and the shop
-names are a big part of what makes it unique, so they stay. That goes for "Fruits Market"
-and "Abdominal" too.
+## What hasn't changed
+
+I love this game's innocent, very Japanese style, and I tried hard to keep it. If
+something wasn't plainly wrong, I left it alone.
+
+The Story mode scenes are almost word for word what they were. They got typo and grammar
+fixes and a couple of small rewordings, and two lines that ran past the edge of their box
+now fit. The characters are all the
+same, and so are the shop names and most of the item names, "Fruits Market" included.
+Changing the shop names would have meant redrawing the signs, but that wasn't really the
+reason. They're a big part of what makes the game what it is.
 
 A few other things were left as they are on purpose, like "Wining Conditions" on the
 setup screen, which is drawn into a graphic where there's no room for the extra letter.
-The full list, with the reasons, is in [docs/decisions.md](docs/decisions.md), so nobody
-has to wonder whether they were missed.
+The full list, with the reasons, is in [docs/decisions.md](docs/decisions.md).
 
-This is a translation fix, so the game plays exactly as it always has, apart from that
-event text timing.
+Apart from that event text timing, the game plays exactly as it always has.
 
 ## Applying the patch
 

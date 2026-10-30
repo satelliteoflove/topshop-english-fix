@@ -25,13 +25,15 @@ suggest undoing them.
   edit that's longer than its original wherever the code copies it this way; 25 strings in
   the executable are copied like this (`block_copies` in scripts/build.py).
 - **Six points-exchange labels say what the item actually does,** checked against the code
-  that carries out each effect (docs/exe-audit.html). "Match a rival's money" was wrong: it
-  gives you cash equal to the rival's total, and they keep theirs, so it's now "Get cash
-  equal to a rival's money". "Close all out-of-stock stores" and "Take all out-of-stock
-  stores" only touch rivals' stores, so they say "rivals'". "Deliver one costly item"
-  delivers one to each of your stores, so it's "Deliver 1 costly item to each store". The
-  two "Cut rival money" items became "Rivals lose 150/300 per store they own", since every
-  rival pays for their own stores and the money doesn't go to you.
+  that carries out each effect (docs/exe-audit.html). "Receive money amount of rival." was
+  wrong: it gives you cash equal to the rival's total, and they keep theirs, so it's now
+  "Get cash equal to a rival's money". "Stores out of stock close.(All)" and "Receive all
+  stores out of stock." only touch rivals' stores, so they're "Close rivals' out-of-stock
+  stores" and "Take rivals' out-of-stock stores". "Deliver expensive item." delivers one to
+  each of your stores, so it's "Deliver 1 costly item to each store". "Cut rival
+  money.(stores x 150)" and "Cut rival money.(stores x 300)" became "Rivals lose 150 per
+  store they own" and "Rivals lose 300 per store they own", since every rival pays for
+  their own stores and the money doesn't go to you.
 - **"From Bigining" is now "From Beginning"** on the Story Mode menu. Every letter came
   from the same sheet, so it's the game's own font: the e is the one from "From Stage",
   recoloured to the shading of this line. The sprite was widened from 80 to 96 pixels to
@@ -100,7 +102,9 @@ deliberately not changed.
 - **Shop names** stay as they are, in the text as well as on the signs. Editing them would
   mean redrawing the sign graphics, but that's not the main reason. The shop names are a
   big part of the game's feel and of what makes it unique, so they stay. That includes
-  "Fruits Market", the "DX" names and "Abdominal" (a kind of massage, not a body part).
+  "Fruits Market".
+- **A few odd item names stay too,** for the same feel: the "DX" sets (DX Sushi Set, DX
+  Combo and the rest) and "Abdominal", a treatment at Aesthetics Julia, not a body part.
 - **"Published by Agetec,Inc." and "©KID 1999,2000,2001"** in the opening sheet (OPEN2.SPC).
   The title screen never draws them: the copyright and trademark text is part of the title
   picture, and "A1 Games" sits where Tenant Wars put its "©KID 1998". The same goes for
